@@ -12,7 +12,7 @@ git clone https://github.com/ssh-hyx-ysb/mathematical-modeling.git
 
 ## VS code 使用
 
-### 插件
+### 插件推荐
 
 ```plain
 Error Lens          # 更好的报错显示
@@ -38,6 +38,106 @@ Jupyter Hub         # Jupyter VS code 支持
 
 ```bash
 sudo apt install texlive-full
+```
+
+### 基础语法（基于仓库内模板）
+
+- 字体
+
+```latex
+\textbf{粗体文本}
+\textit{斜体文本}
+\underline{带下划线的文本}
+```
+
+- 摘要和关键词
+
+```latex
+\begin{abstract}                    % 摘要起始
+
+    \textbf{针对问题一，}           % 问题一
+
+    \textbf{针对问题二，}           % 问题二
+
+    \textbf{针对问题三，}           % 问题三
+
+    \textbf{针对问题四，}           % 问题四
+
+    \keywords{word1 \quad word2}    % 关键词
+\end{abstract}                      % 摘要结束
+```
+
+- 章节标题
+
+```latex
+\subsection{章节名}
+```
+
+- 小节标题
+
+```latex
+\subsection{小节名}
+```
+
+- 小节内小节标题
+
+```latex
+\subsubsection{小节内小节名}
+```
+
+- 公式
+
+```latex
+XXX$行内公式$XXX
+\begin{equation}
+段公式
+\end{equation}
+```
+
+- 列表
+
+```latex
+\begin{itemize}
+    \item 第一项
+    \item 第二项
+\end{itemize}
+
+\begin{enumerate}
+    \item 第一步
+    \item 第二步
+\end{enumerate}
+```
+
+- 图
+
+```latex
+XXX\ref{fig:label}              % 引用图label为`fig:label`的图片
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{图片路径} % 以70%文件宽引用并显示位于`图片路径`下的图片
+    \caption{图片标题}  % 显示在图片下的标题
+    \label{图片标签}    % 引用时显示此图片的序号
+\end{figure}
+```
+
+- 表
+
+```latex
+\begin{table}[H]
+    \centering
+    \caption{表标题}
+    \label{表标签}
+    \begin{tabular}{表型}
+    \toprule    % 上表线
+    表头
+    \midrule    % 表头表身分割线
+    内容
+    \bottomrule % 下表线
+    \end{tabular}
+    \begin{tablenotes}[para,small]
+        % 表注
+    \end{tablenotes}
+\end{table}
 ```
 
 ## UV 使用
