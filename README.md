@@ -146,7 +146,6 @@ XXX$行内公式$XXX
 - 图
 
 ```latex
-XXX\ref{fig:label}              % 引用图label为`fig:label`的图片
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{图片路径} % 以70%文件宽引用并显示位于`图片路径`下的图片
@@ -175,7 +174,13 @@ XXX\ref{fig:label}              % 引用图label为`fig:label`的图片
 \end{table}
 ```
 
-## UV 使用
+- 引用
+
+```latex
+\ref{xx}    % 引用label为`xx`的图或表
+```
+
+## uv 使用
 
 ### 下载安装
 
