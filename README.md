@@ -124,6 +124,7 @@ sudo apt install texlive-full
 
 ```latex
 XXX$行内公式$XXX
+
 \begin{equation}
 段公式
 \end{equation}
