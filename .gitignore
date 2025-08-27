@@ -8,3 +8,12 @@ wheels/
 
 # Virtual environments
 .venv
+
+# ignore latex middle files
+*.aux
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.xdv
