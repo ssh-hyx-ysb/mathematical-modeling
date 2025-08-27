@@ -70,7 +70,7 @@ sudo apt install texlive-full
 - 章节标题
 
 ```latex
-\subsection{章节名}
+\section{章节名}
 ```
 
 - 小节标题
