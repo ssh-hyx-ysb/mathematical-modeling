@@ -10,6 +10,28 @@ git clone https://github.com/ssh-hyx-ysb/mathematical-modeling.git
 
 3. 点击`文件` -> `打开文件夹..` -> 选择并打开仓库文件夹
 
+## VS code 使用
+
+### 插件
+
+```plain
+Error Lens          # 更好的报错显示
+vsode-icons         # 更好的图标显示
+Lingma - Alibaba    # 通义灵码，AI辅助编程工具
+Typora              # Markdown 文件编辑支持
+LaTeX Workshop      # LaTeX VS code 支持
+Python              # Python VS code 支持
+Pylance             # Python VS code 支持
+Python Debugger     # Python VS code 支持
+Python Environments # Python VS code 支持
+Black Formatter     # Python 文件格式化插件
+Jupyter Slide Show  # Jupyter VS code 支持
+Jupyter PowerToys   # Jupyter VS code 支持
+Jupyter Cell Tags   # Jupyter VS code 支持
+Jupyter Keymap      # Jupyter VS code 支持
+Jupyter Hub         # Jupyter VS code 支持
+```
+
 ## Latex 模板使用
 
 ### Latex 下载
