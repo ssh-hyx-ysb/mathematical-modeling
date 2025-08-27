@@ -1,5 +1,7 @@
 ## git 仓库使用
 
+### git clone
+
 1. 进入 Linux 某文件夹并克隆仓库
 
 ```bash
@@ -9,6 +11,39 @@ git clone https://github.com/ssh-hyx-ysb/mathematical-modeling.git
 2. 在 VS code 下打开 WSL 链接
 
 3. 点击`文件` -> `打开文件夹..` -> 选择并打开仓库文件夹
+
+### git commit
+
+- 提交之前需要配置用户名和提交邮箱
+
+```bash
+git config --global user.name [GitHub 用户名]
+git config --global user.email [GitHub 提交邮箱]
+```
+
+- VS code 提交方式
+
+当有文件产生修改（创建、修改、删除、忽略等）时，看到 VS code 左侧按钮（源代码管理按钮）有提示，点进去，输入消息（一定要输入！！！），然后点提交，然后点同步即可
+
+- 命令行提交方式
+
+```bash
+git add [filename]  # 暂存文件更改
+git commit -m "提交消息" # 提交暂存文件，提交消息为"提交消息"
+git push # 推送到远程仓库
+```
+
+### git pull
+
+- VS code 拉取方式
+
+在 VS code 源代码管理栏，点击同步（远程仓库有修改的情况下）即可拉取远程仓库的更改，或点击与`更改`在同一行的三个点按钮，点`拉取`手动同步远程仓库
+
+- 命令行拉取方式
+
+```bash
+git pull    # 拉取远程仓库的修改
+```
 
 ## VS code 使用
 
@@ -201,7 +236,7 @@ https://ikuuu.de
 ```
 tar -xzvf clashpremium-release-linux-amd64.tar.gz
 chmod +x CrashCore
-mv CrashCore /usr/bin/clash
+sudo mv CrashCore /usr/bin/clash
 ```
 
 4. 创建 clash.service 文件
