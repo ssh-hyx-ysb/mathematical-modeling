@@ -262,7 +262,7 @@ nano clash.service
 
 写入以下内容
 
-```nano
+```conf
 [Unit]
 Description=Clash
 
