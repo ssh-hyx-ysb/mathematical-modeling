@@ -1,3 +1,15 @@
+## git 仓库使用
+
+1. 进入 Linux 某文件夹并克隆仓库
+
+```bash
+git clone https://github.com/ssh-hyx-ysb/mathematical-modeling.git
+```
+
+2. 在 VS code 下打开 WSL 链接
+
+3. 点击`文件` -> `打开文件夹..` -> 选择并打开仓库文件夹
+
 ## Latex 模板使用
 
 ### Latex 下载
