@@ -274,25 +274,31 @@ ExecStart=-/usr/bin/clash
 WantedBy=multi-user.target
 ```
 
-6. 刷新 systemctl 缓存
+6. 移动文件到 systemd 文件夹
+
+```bash
+sudo mv clash.service /etc/systemd/system/
+```
+
+7. 刷新 systemd 缓存
 
 ```bash
 sudo systemctl daemon-reload
 ```
 
-7. 创建 config 文件夹
+8. 创建 config 文件夹
 
 ```bash
 sudo mkdir -p /.config/clash
 ```
 
-7. 将刚刚下载的 config.yaml 移动到这个文件夹（假设 config.yaml 在当前文件夹下）
+9. 将刚刚下载的 config.yaml 移动到这个文件夹（假设 config.yaml 在当前文件夹下）
 
 ```bash
 sudo mv config.yaml /.config/clash
 ```
 
-8. 启动 clash 服务
+10. 启动 clash 服务
 
 ```bash
 sudo systemctl satrt clash      # 第一次运行下载必须的文件
@@ -300,7 +306,7 @@ sudo systemctl restart clash    # 第二次运行正常启动
 sudo systemctl enable clash     # 添加clash开机自启动
 ```
 
-9. 添加代理
+11. 添加代理
 
 - 打开主文件夹下的`.bashrc`文件
 
