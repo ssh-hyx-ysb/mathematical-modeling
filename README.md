@@ -178,6 +178,7 @@ XXX$行内公式$XXX
 
 ```latex
 \ref{xx}    % 引用label为`xx`的图或表
+\cite{xx}   % 引用文献关键字为`xx`的文献
 ```
 
 ## uv 使用
