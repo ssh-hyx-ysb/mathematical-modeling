@@ -11,10 +11,20 @@ sudo apt install texlive-full
 ### 下载安装
 
 ```bash
-sudo
+curl -LsSf https://astral.sh/uv/install.sh | sh     # 下载uv，需配置代理
+source $HOME/.local/bin/env                         # 配置环境变量
 ```
 
 ### 环境初始化
+
+```bash
+uv init                 # 初始化当前文件夹的uv环境
+uv init [PROJECT_NAME]  # 在当前文件夹下初始化一个名为[PROJECT_NAME]的uv环境
+```
+
+### 环境加载
+
+在一个有`uv.lock`和`pyproject.toml`文件的文件夹下，运行这个命令可以快速搭建起可用的 Python 环境
 
 ```bash
 uv sync
