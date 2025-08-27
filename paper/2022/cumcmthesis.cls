@@ -1,6 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{cumcmthesis}
-              [2017/09/16 v2.6 Standard LaTeX Template for CUMCM]
+[2017/09/16 v2.6 Standard LaTeX Template for CUMCM]
 %% Inital Code
 \newif\if@mcm@bwprint\@mcm@bwprintfalse
 \newif\if@mcm@preface\@mcm@prefacetrue
@@ -33,8 +33,9 @@
 \RequirePackage{ifxetex}
 \RequireXeTeX
 \ifxetex\else
-\ClassError{mcmthesis}{You must use the `xelatex' driver\MessageBreak Please choose `xelatex'}{%
-Just choose `xelatex', no `pdflatex' or `latex' and so on.}
+  \ClassError{mcmthesis}{You must use the `xelatex' driver\MessageBreak Please choose `xelatex'}{%
+    Just choose `xelatex', no `pdflatex' or `latex' and so on.}
+  
 \fi
 % 支持中文的 ctex 宏包
 \RequirePackage{ctex}
@@ -70,7 +71,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 \RequirePackage[titles]{tocloft}
 \renewcommand{\cftdot}{$\cdot$}
-\renewcommand{\cftsecdotsep}{1.5} 
+\renewcommand{\cftsecdotsep}{1.5}
 \setlength{\cftbeforesecskip}{7pt}
 \setlength{\cftbeforesubsecskip}{3pt}
 \renewcommand{\cftsecfont}{\bfseries\zihao{-4}\heiti}
@@ -119,9 +120,9 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 \RequirePackage{etoolbox}
 \AtBeginEnvironment{thebibliography}{%
-    \phantomsection
-    \addcontentsline{toc}{section}{\refname}
-    }
+  \phantomsection
+  \addcontentsline{toc}{section}{\refname}
+}
 % 超链接 hyperref 的设置
 \RequirePackage{hyperref}
 %% Document Layout
@@ -132,10 +133,10 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \let\mcm@oldtabular\tabular
 \let\mcm@endoldtabular\endtabular
 \renewenvironment{tabular}%
-	{\bgroup%
-	\renewcommand{\arraystretch}{1.38}%
-	\mcm@oldtabular}%
-	{\mcm@endoldtabular\egroup}
+{\bgroup%
+  \renewcommand{\arraystretch}{1.38}%
+  \mcm@oldtabular}%
+{\mcm@endoldtabular\egroup}
 % 每行缩进两个汉字
 \setlength\parindent{2em}
 % 设置字体
@@ -148,10 +149,10 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*{\song}{\CJKfamily{song}}
 
 \renewcommand\normalsize{%
-	\@setfontsize\normalsize{12.05}{14.45}%
-	\abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
-	\abovedisplayshortskip \z@ \@plus3\p@
-	\belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@}
+  \@setfontsize\normalsize{12.05}{14.45}%
+  \abovedisplayskip 12\p@ \@plus3\p@ \@minus7\p@
+  \abovedisplayshortskip \z@ \@plus3\p@
+  \belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus3\p@}
 % 数学环境, 定理等设置
 \newtheorem{definition}{\mcm@cap@definition}
 \newtheorem{theorem}{\mcm@cap@theorem}
@@ -169,78 +170,78 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 % 浮动环境设置
 % 默认情况下, \LaTeX{} 要求每页的文字至少占据 20%,否则该页就只单独放置一个浮动环境,
 % 而这通常不是我们想要的, 我们将这个要求降低到 5%.
- \renewcommand*{\textfraction}{0.05}
+\renewcommand*{\textfraction}{0.05}
 % 有时如果多个浮动环境连续放在一起, \LaTeX{}
 % 会将它们分在几个不同页，即使它们可在同一页放
 % 得下. 我们可以通过修改 |\topfraction| 和 |\bottomfraction| 分别设置顶端和底端的浮
 % 动环境的最大比例.
- \renewcommand*{\topfraction}{0.9}
- \renewcommand*{\bottomfraction}{0.8}
+\renewcommand*{\topfraction}{0.9}
+\renewcommand*{\bottomfraction}{0.8}
 % 有时\LaTeX{}会把一个浮动环境单独放在一页,
 % 我们要求这个环境至少要占据 85% 才能单独放在一页.
 % 注意:  |\floatpagefraction| 的数值必须小于 |\topfraction|.
- \renewcommand*{\floatpagefraction}{0.85}
+\renewcommand*{\floatpagefraction}{0.85}
 % 关于图片 graphicx
- % 如果图片没有指定后缀, 依次按下列顺序搜索
+% 如果图片没有指定后缀, 依次按下列顺序搜索
 \DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
- % 设置图表搜索路径, 可以给图表文件夹取如下名字
+% 设置图表搜索路径, 可以给图表文件夹取如下名字
 \graphicspath{{figures/}{figure/}{pictures/}%
-  {picture/}{pic/}{pics/}{image/}{images/}}
+    {picture/}{pic/}{pics/}{image/}{images/}}
 % 图表标题
 \DeclareCaptionFont{song}{\songti}
 \DeclareCaptionFont{minusfour}{\zihao{-4}}
 \captionsetup[figure]{%
-	format=hang,   % 标题从第二行开始都有缩进, 应该和 justification=raggedright 的效果一样.
-	labelsep=quad, % 分隔符是一个空格
-	font={song,minusfour,bf}, % 图的字体, 宋体小四
-	position=bottom % position=bottom, 不代表标题放在下面, 标题仍放在你放\caption的位置.
+  format=hang,   % 标题从第二行开始都有缩进, 应该和 justification=raggedright 的效果一样.
+  labelsep=quad, % 分隔符是一个空格
+  font={song,minusfour,bf}, % 图的字体, 宋体小四
+  position=bottom % position=bottom, 不代表标题放在下面, 标题仍放在你放\caption的位置.
 }
 \captionsetup[table]{%
-	format=hang,   % 标题从第二行开始都有缩进, 应该和 justification=raggedright 的效果一样.
-	labelsep=quad, % 分隔符是一个空格
-	font={song,minusfour,bf}, % 表的字体, 宋体小四
-	position=top % position=bottom, 不代表标题放在下面, 标题仍放在你放\caption的位置.
+  format=hang,   % 标题从第二行开始都有缩进, 应该和 justification=raggedright 的效果一样.
+  labelsep=quad, % 分隔符是一个空格
+  font={song,minusfour,bf}, % 表的字体, 宋体小四
+  position=top % position=bottom, 不代表标题放在下面, 标题仍放在你放\caption的位置.
 }
 % 列表环境设置
 \setlist{%
-	topsep=0.3em, % 列表顶端的垂直空白
-	partopsep=0pt, % 列表环境前面紧接着一个空白行时其顶端的额外垂直空白
-	itemsep=0ex plus 0.1ex, % 列表项之间的额外垂直空白
-	parsep=0pt, % 列表项内的段落之间的垂直空白
-	leftmargin=1.5em, % 环境的左边界和列表之间的水平距离
-	rightmargin=0em, % 环境的右边界和列表之间的水平距离
-	labelsep=0.5em, % 包含标签的盒子与列表项的第一行文本之间的间隔
-	labelwidth=2em % 包含标签的盒子的正常宽度；若实际宽度更宽，则使用实际宽度。
+  topsep=0.3em, % 列表顶端的垂直空白
+  partopsep=0pt, % 列表环境前面紧接着一个空白行时其顶端的额外垂直空白
+  itemsep=0ex plus 0.1ex, % 列表项之间的额外垂直空白
+  parsep=0pt, % 列表项内的段落之间的垂直空白
+  leftmargin=1.5em, % 环境的左边界和列表之间的水平距离
+  rightmargin=0em, % 环境的右边界和列表之间的水平距离
+  labelsep=0.5em, % 包含标签的盒子与列表项的第一行文本之间的间隔
+  labelwidth=2em % 包含标签的盒子的正常宽度；若实际宽度更宽，则使用实际宽度。
 }
 
 % 超链接
-	 \hypersetup{%
-         xetex,
-		% unicode=false, % hyperref 和 xetex 同时使用时不能开启 Unicode 选项.
-         pdfstartview=FitH,
-         CJKbookmarks=true,
-         bookmarksnumbered=true,
-         bookmarksopen=true,
-         colorlinks, %注释掉此项则交叉引用为彩色边框(将colorlinks和pdfborder同时注释掉)
-         pdfborder=001,   %注释掉此项则交叉引用为彩色边框
-		 allcolors=black,
-		 breaklinks=true}%
+\hypersetup{%
+  %  xetex,
+  % unicode=false, % hyperref 和 xetex 同时使用时不能开启 Unicode 选项.
+  pdfstartview=FitH,
+  CJKbookmarks=true,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  colorlinks, %注释掉此项则交叉引用为彩色边框(将colorlinks和pdfborder同时注释掉)
+  pdfborder=001,   %注释掉此项则交叉引用为彩色边框
+  allcolors=black,
+  breaklinks=true}%
 % \if@mcm@bwprint
 % \AtBeginDocument{\hypersetup{hidelinks}}
 % \else\relax\fi
 \lstnewenvironment{tcode}
-  {
-    \lstset{basicstyle = \small\ttfamily,
-        language=TeX,
-        tabsize = 4,
-        frame = single,
-        escapechar = `,
-        breaklines = true,
-        breakatwhitespace = true,
-        frameround = tttt,
-    }
+{
+  \lstset{basicstyle = \small\ttfamily,
+    language=TeX,
+    tabsize = 4,
+    frame = single,
+    escapechar = `,
+    breaklines = true,
+    breakatwhitespace = true,
+    frameround = tttt,
   }
-  {}
+}
+{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -248,11 +249,11 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 
 % 生成封面, 使用\maketitle
 \renewcommand{\maketitle}{\par
-	\begingroup
-      \newpage
-      \global\@topnum\z@   % Prevents figures from going at top of page.
-      \@maketitle
-    \endgroup
+  \begingroup
+  \newpage
+  \global\@topnum\z@   % Prevents figures from going at top of page.
+  \@maketitle
+  \endgroup
   \global\let\thanks\relax
   \global\let\maketitle\relax
   \global\let\@maketitle\relax
@@ -268,16 +269,16 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \def\@maketitle{%
   \newpage
   \if@mcm@preface
-  \null
- % 承诺书
- \vskip2ex
-  \thispagestyle{empty}
-  {\zihao{4}\mcm@commit@string@headname\\[-3pt]
-  \noindent\rule{\textwidth-1.34em}{1pt}\par}
-  \begin{center}%
-    {\zihao{-3}\bfseries\heiti \mcm@commit@string@titlea \par}%
-    {\vskip1ex\zihao{3}\bfseries\songti \mcm@commit@string@titleb \par}
-  \end{center}
+    \null
+    % 承诺书
+    \vskip2ex
+    \thispagestyle{empty}
+    {\zihao{4}\mcm@commit@string@headname\\[-3pt]
+      \noindent\rule{\textwidth-1.34em}{1pt}\par}
+    \begin{center}%
+      {\zihao{-3}\bfseries\heiti \mcm@commit@string@titlea \par}%
+      {\vskip1ex\zihao{3}\bfseries\songti \mcm@commit@string@titleb \par}
+    \end{center}
     {\zihao{-4} \mcm@commit@string@contents \par}
     {\vskip1ex\zihao{-4}
     \renewcommand{\ULthickness}{0.4pt}\setlength{\ULdepth}{2pt}
@@ -290,10 +291,10 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
     % 不这样做右边难以对齐!
     \mcm@commit@string@membername
     \begin{minipage}[t]{\mcm@lenB}
-   	1.\uline{\hspace{1em}\mcm@tokens@membera\hfill} \makebox[0.46em]{}\par
-   	2.\uline{\hspace{1em}\mcm@tokens@memberb\hfill} \makebox[0.46em]{}\par
-   	3.\uline{\hspace{1em}\mcm@tokens@memberc\hfill} \makebox[0.46em]{}\par
-   \end{minipage}\par\vskip1ex
+      1.\uline{\hspace{1em}\mcm@tokens@membera\hfill} \makebox[0.46em]{}\par
+      2.\uline{\hspace{1em}\mcm@tokens@memberb\hfill} \makebox[0.46em]{}\par
+      3.\uline{\hspace{1em}\mcm@tokens@memberc\hfill} \makebox[0.46em]{}\par
+    \end{minipage}\par\vskip1ex
     \mcm@commit@string@supervisorname\uline{\hspace{1em}\mcm@tokens@supervisor\hfill}\makebox[0.66em]{}\par
     （{\kaishu 指导教师签名意味着对参赛队的行为和论文的真实性负责}）
     %{\kaishu\mcm@commit@string@inform\par}
@@ -305,66 +306,66 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
     \uline{\hfill\mcm@tokens@dayinput\hfill}\mcm@commit@string@day\makebox[1em]{}\par}
     \vskip1ex
     {\kaishu\bfseries\mcm@commit@string@inform\par}
-	\vfill
-	\null
-% 编号专用页
-	\else
-	\fi
-	\makeothertitle
-	}
+    \vfill
+    \null
+    % 编号专用页
+  \else
+  \fi
+  \makeothertitle
+}
 
 %% 定义 编号专用页
 \def\makeothertitle{%
   \if@mcm@preface
-  \par
-\newpage
-\null
-\thispagestyle{empty}
-{\zihao{4}\mcm@numberpage@string@headname\\[-5pt]
-  \noindent\hspace*{0.67em}\rule{\textwidth-1.33em}{1pt}\par}
-\begin{center}
-{\zihao{4}\bfseries\heiti \mcm@numberpage@string@titlea\par}
-{\vskip1ex\zihao{3}\bfseries\songti \mcm@numberpage@string@titleb\par}
-\end{center}\par
-{%
-\zihao{4}
-\vskip3em
-\hspace*{2em}\mcm@numberpage@string@appraiselog
-\par
-\newlength{\mcm@lenC}
-\setlength{\mcm@lenC}{\textwidth-8.72em}
-\setlength{\mcm@lenC}{\mcm@lenC/6}
-\newlength{\mcm@lenD}
-\settoheight{\mcm@lenD}{\mcm@numberpage@string@reviewer}
-\setlength{\mcm@lenD}{\mcm@lenD+2em}
-\newlength{\mcm@lenF}
-\settoheight{\mcm@lenF}{\mcm@numberpage@string@remarks}
-\setlength{\mcm@lenF}{\mcm@lenF+2em}
-\newcolumntype{P}{@{}p{\mcm@lenC}@{}}
-\hspace*{1.5em}\begin{tabular}{|!{\hspace{4pt}}c!{\hspace{4pt}}|*{6}{P|}}
- \hline
- \rule{0pt}{\mcm@lenD}\raisebox{0.6em}[0pt][0pt]{\mcm@numberpage@string@reviewer} & & & & & &  \\\cline{1-7}
- \rule{0pt}{\mcm@lenF}\raisebox{0.6em}[0pt][0pt]{\mcm@numberpage@string@remarks} & & & & & &  \\
- \hline
-\end{tabular}\par
-\vskip5em
-\hspace*{2em}\mcm@numberpage@string@unifiednum
-\vskip7em
-\hspace*{2em}\mcm@numberpage@string@countrynum}
-\vskip7em
-{\zihao{-4}\kaishu\bfseries\mcm@numberpage@string@inform\par}
-\vfill
-\null
-\newpage
-\null
-\setcounter{page}{1}
-{\centering \zihao{3}\bfseries \@title\par}
-\vskip1ex
-\else
-\setcounter{page}{1}
-{\centering \zihao{3}\bfseries \@title\par}
-\vskip1ex
-\fi
+    \par
+    \newpage
+    \null
+    \thispagestyle{empty}
+    {\zihao{4}\mcm@numberpage@string@headname\\[-5pt]
+      \noindent\hspace*{0.67em}\rule{\textwidth-1.33em}{1pt}\par}
+    \begin{center}
+      {\zihao{4}\bfseries\heiti \mcm@numberpage@string@titlea\par}
+      {\vskip1ex\zihao{3}\bfseries\songti \mcm@numberpage@string@titleb\par}
+    \end{center}\par
+    {%
+    \zihao{4}
+    \vskip3em
+    \hspace*{2em}\mcm@numberpage@string@appraiselog
+    \par
+    \newlength{\mcm@lenC}
+    \setlength{\mcm@lenC}{\textwidth-8.72em}
+    \setlength{\mcm@lenC}{\mcm@lenC/6}
+    \newlength{\mcm@lenD}
+    \settoheight{\mcm@lenD}{\mcm@numberpage@string@reviewer}
+    \setlength{\mcm@lenD}{\mcm@lenD+2em}
+    \newlength{\mcm@lenF}
+    \settoheight{\mcm@lenF}{\mcm@numberpage@string@remarks}
+    \setlength{\mcm@lenF}{\mcm@lenF+2em}
+    \newcolumntype{P}{@{}p{\mcm@lenC}@{}}
+    \hspace*{1.5em}\begin{tabular}{|!{\hspace{4pt}}c!{\hspace{4pt}}|*{6}{P|}}
+      \hline
+      \rule{0pt}{\mcm@lenD}\raisebox{0.6em}[0pt][0pt]{\mcm@numberpage@string@reviewer} &  &  &  &  &  & \\\cline{1-7}
+      \rule{0pt}{\mcm@lenF}\raisebox{0.6em}[0pt][0pt]{\mcm@numberpage@string@remarks}  &  &  &  &  &  & \\
+      \hline
+    \end{tabular}\par
+    \vskip5em
+    \hspace*{2em}\mcm@numberpage@string@unifiednum
+    \vskip7em
+    \hspace*{2em}\mcm@numberpage@string@countrynum}
+    \vskip7em
+    {\zihao{-4}\kaishu\bfseries\mcm@numberpage@string@inform\par}
+    \vfill
+    \null
+    \newpage
+    \null
+    \setcounter{page}{1}
+    {\centering \zihao{3}\bfseries \@title\par}
+    \vskip1ex
+  \else
+    \setcounter{page}{1}
+    {\centering \zihao{3}\bfseries \@title\par}
+    \vskip1ex
+  \fi
 }
 
 % 中文标题名称设置
@@ -387,62 +388,62 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \renewcommand\thesubsection{\arabic{section}\thinspace.\thinspace\arabic{subsection}}
 \renewcommand\thesubsubsection{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
 \renewcommand\section{\@startsection{section}{1}{\z@}%
- 	{-3.5ex \@plus -1ex \@minus -.2ex}%
-	{2.3ex \@plus.2ex}%
-	{\centering\normalfont\Large\bfseries}}
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\centering\normalfont\Large\bfseries}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-	{-3.25ex\@plus -1ex \@minus -.2ex}%
-	{1.5ex \@plus .2ex}%
-	{\normalfont\large\bfseries}}
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\large\bfseries}}
 \renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-	{-3.25ex\@plus -1ex \@minus -.2ex}%
-	{1.5ex \@plus .2ex}%
-	{\normalfont\normalsize\bfseries}}
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-	{3.25ex \@plus1ex \@minus.2ex}%
-	{-1em}%
-	{\normalfont\normalsize\bfseries}}
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
 \renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
-	 {3.25ex \@plus1ex \@minus .2ex}%
-	 {-1em}%
-	 {\normalfont\normalsize\bfseries}}
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define new environment and command
 %% 摘要两个字设置为 4 号.
 %% 定义摘要环境
 \renewenvironment{abstract}{%
-\if@twocolumn
-		\section*{\abstractname}%
-	\else
-	 \begin{center}%
-	{\zihao{4}\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}%
-	 \end{center}%
- 	 \quotation
-	\fi}
-	{\if@twocolumn\else\endquotation\newpage\null\fi}
+  \if@twocolumn
+    \section*{\abstractname}%
+  \else
+    \begin{center}%
+      {\zihao{4}\bfseries \abstractname\vspace{-.5em}\vspace{\z@}}%
+    \end{center}%
+    \quotation
+  \fi}
+{\if@twocolumn\else\endquotation\newpage\null\fi}
 \renewenvironment{quotation}
-	{\list{}{\listparindent 2em%
-	 \itemindent \listparindent
-	 \rightmargin\z@
-	 \leftmargin\z@
-	 \parsep \z@ \@plus\p@}%
-	\item\relax}
-	{\endlist}
+{\list{}{\listparindent 2em%
+    \itemindent \listparindent
+    \rightmargin\z@
+    \leftmargin\z@
+    \parsep \z@ \@plus\p@}%
+  \item\relax}
+{\endlist}
 
 \newcommand\keywords[1]{%
-	\renewcommand{\mcm@tokens@keywords}{#1}
-	\par
-	\vskip1ex
-	{\noindent\zihao{-4}\heiti\mcm@cap@keywordsname：}~{\mcm@tokens@keywords}
-	}
+\renewcommand{\mcm@tokens@keywords}{#1}
+\par
+\vskip1ex
+{\noindent\zihao{-4}\heiti\mcm@cap@keywordsname：}~{\mcm@tokens@keywords}
+}
 % 定义附录	
 
 % \renewcommand{\setthesection}{\appendixname\Alph{section}}
 % \renewcommand\appendix{\par
-	% \setcounter{section}{0}%
-	 % \setcounter{subsection}{0}%
-	% \gdef\thesection{\appendixname\@Alph\c@section}}		
+% \setcounter{section}{0}%
+% \setcounter{subsection}{0}%
+% \gdef\thesection{\appendixname\@Alph\c@section}}		
 % 重定义参考文献环境
 % \renewenvironment{thebibliography}[1]
 %      {\section*{\refname}%
@@ -465,30 +466,30 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 %       \endlist}	
 
 \newcommand*\tihao[1]{%
-	\renewcommand{\mcm@tokens@tihao}{#1}}
+  \renewcommand{\mcm@tokens@tihao}{#1}}
 \newcommand*\baominghao[1]{%
-	\renewcommand{\mcm@tokens@baominghao}{#1}}
+  \renewcommand{\mcm@tokens@baominghao}{#1}}
 \newcommand*\schoolname[1]{%
-	\renewcommand{\mcm@tokens@schoolname}{#1}}
+  \renewcommand{\mcm@tokens@schoolname}{#1}}
 \newcommand*\membera[1]{%
-	\renewcommand{\mcm@tokens@membera}{#1}}
+  \renewcommand{\mcm@tokens@membera}{#1}}
 \newcommand*\memberb[1]{%
-	\renewcommand{\mcm@tokens@memberb}{#1}}
+  \renewcommand{\mcm@tokens@memberb}{#1}}
 \newcommand*\memberc[1]{%
-	\renewcommand{\mcm@tokens@memberc}{#1}}
+  \renewcommand{\mcm@tokens@memberc}{#1}}
 \newcommand*\supervisor[1]{%
-	\renewcommand{\mcm@tokens@supervisor}{#1}}
+  \renewcommand{\mcm@tokens@supervisor}{#1}}
 \newcommand*\yearinput[1]{%
-	\renewcommand{\mcm@tokens@yearinput}{#1}}
+  \renewcommand{\mcm@tokens@yearinput}{#1}}
 \newcommand*\monthinput[1]{%
-	\renewcommand{\mcm@tokens@monthinput}{#1}}
+  \renewcommand{\mcm@tokens@monthinput}{#1}}
 \newcommand*\dayinput[1]{%
-	\renewcommand{\mcm@tokens@dayinput}{#1}}
+  \renewcommand{\mcm@tokens@dayinput}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Initialization
- %%%数学定理相关的常量
+%%%数学定理相关的常量
 \newcommand*{\mcm@cap@definition}{定义}
 \newcommand*{\mcm@cap@theorem}{定理}
 \newcommand*{\mcm@cap@lemma}{引理}
@@ -501,7 +502,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*{\mcm@cap@example}{例}
 \newcommand*{\mcm@cap@proof}{证明}
 \newcommand*{\mcm@cap@solution}{解}
- %%%  中文标题名称
+%%%  中文标题名称
 \newcommand*{\mcm@cap@contentsname}{目录}
 \newcommand*{\mcm@cap@listfigurename}{插图清单}
 \newcommand*{\mcm@cap@listtablename}{附表清单}
@@ -511,15 +512,15 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*{\mcm@cap@tablename}{表}
 \newcommand*{\mcm@cap@appendixname}{附录}
 \newcommand*{\mcm@cap@abstractname}{摘要}
- %%%  中文关键字
-\newcommand*{\mcm@cap@keywordsname}{关键字}
+%%%  中文关键字
+\newcommand*{\mcm@cap@keywordsname}{关键词}
 
- %%% 承诺书中的常量
+%%% 承诺书中的常量
 \newcommand*\mcm@commit@string@headname{赛区评阅编号（由赛区组委会填写）：}
 \newcommand*\mcm@commit@string@titlea{\the\year 高教社杯全国大学生数学建模竞赛}
 \newcommand*\mcm@commit@string@titleb{承\hspace{1em}诺\hspace{1em}书}
 \newcommand\mcm@commit@string@contents{\quotation
- 我们仔细阅读了《全国大学生数学建模竞赛章程》和《全国大学生数学建模竞赛参赛规则》%
+我们仔细阅读了《全国大学生数学建模竞赛章程》和《全国大学生数学建模竞赛参赛规则》%
 \hspace*{-0.6em}（以下简称为“竞赛章程和参赛规则”，\hspace{-0.2em}可从全国大学生数学建模竞赛网站下载）。
 
 我们完全明白，在竞赛开始后参赛队员不能以任何方式（包括电话、电子邮件、网上QQ群、微信群等）与队外的任
@@ -532,7 +533,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 {\bfseries\song 我们以中国大学生名誉和诚信郑重承诺，严格遵守竞赛章程和参赛规则，以保证竞赛的公正、公平性。
 如有违反竞赛章程和参赛规则的行为，我们将受到严肃处理。}
 
- 我们授权全国大学生数学建模竞赛组委会，可将我们的论文以任何形式进行公开展示%
+我们授权全国大学生数学建模竞赛组委会，可将我们的论文以任何形式进行公开展示%
 （包括进行网上公示，在书籍、期刊和其他媒体进行正式或非正式发表等）。
 \endquotation
 }
@@ -542,9 +543,9 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*\mcm@commit@string@membername{参赛队员 (打印并签名) ：}
 \newcommand*\mcm@commit@string@supervisorname{指导教师或指导教师组负责人  (打印并签名)：}
 \newcommand\mcm@commit@string@inform{\quotation
-\noindent{（\bfseries\kai 请勿改动此页内容和格式。此承诺书打印签名后作为纸质论文的封面，注意电子版论文中不得出现此页。%
-以上内容请仔细核对，如填写错误，论文可能被取消评奖资格。）}
-\endquotation
+  \noindent{（\bfseries\kai 请勿改动此页内容和格式。此承诺书打印签名后作为纸质论文的封面，注意电子版论文中不得出现此页。%
+    以上内容请仔细核对，如填写错误，论文可能被取消评奖资格。）}
+  \endquotation
 }
 \newcommand*\mcm@commit@string@date{日期:}
 \newcommand*\mcm@commit@string@year{年}
@@ -552,7 +553,7 @@ Just choose `xelatex', no `pdflatex' or `latex' and so on.}
 \newcommand*\mcm@commit@string@day{日}
 \newcommand*\mcm@commit@string@appraisenum{赛区评阅编号（由赛区组委会评阅前进行编号）：}
 
- %%% 编号专用页中的常量
+%%% 编号专用页中的常量
 \newcommand*\mcm@numberpage@string@headname{赛区评阅编号（由赛区组委会填写）：}
 \newcommand*\mcm@numberpage@string@titlea{\the\year 高教社杯全国大学生数学建模竞赛}
 \newcommand*\mcm@numberpage@string@titleb{编\hspace{.5em}号\hspace{.5em}专\hspace{.5em}用\hspace{.5em}页}
