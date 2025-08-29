@@ -17,4 +17,4 @@ wheels/
 *.log
 *.out
 *.xdv
-*.paper.synctex.gz
+*.synctex.gz
