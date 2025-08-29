@@ -301,7 +301,7 @@ sudo mv config.yaml /.config/clash
 10. 启动 clash 服务
 
 ```bash
-sudo systemctl satrt clash      # 第一次运行下载必须的文件
+sudo systemctl start clash      # 第一次运行下载必须的文件
 sudo systemctl restart clash    # 第二次运行正常启动
 sudo systemctl enable clash     # 添加clash开机自启动
 ```
