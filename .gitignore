@@ -18,3 +18,6 @@ wheels/
 *.out
 *.xdv
 *.synctex.gz
+
+# test files
+test/
