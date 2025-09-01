@@ -166,7 +166,7 @@
         \caption{主动机与被动机排布的情况2}
         \label{q1_2}   
     \end{minipage}
-    \caption*{\small 注：主动机发射的方向信息$\alpha$为$(i,0)$的夹角，$\beta$为$(0,1)$的夹角，图\ref{q1_2}同理。}
+    \caption*{\small 注：主动机发射的方向信息$\alpha$为$(i,0)$的夹角，$\beta$为$(0,1)$的夹角。}
 \end{figure}
 
 
@@ -208,44 +208,62 @@
     \right.
 \end{equation}
 
-在求解过程中，我们得到被动机位置的极坐标解为\((r_1,\varphi_1)\)和\((r_2,\varphi_2)\)。由于无法直接确定\(\alpha\)、\(\beta\)分别对应哪两台主动机发射的信号，因此会产生两个可能的位置解。为确定实际位置，假设主动机信号的发射次序已知，这一假设在实际场景中具有合理性。
+在求解过程中，我们得到被动机位置的极坐标解为\((r_1,\varphi_1)\)和\((r_2,\varphi_2)\)。在几何上关于三架主动机对应圆心角的角平分线对称分布（见图\ref{q1_3}）。特别地，当被动机位于该角平分线的延长线上时，两个解将重合（见图\ref{q1_4}）。
 
-上述两组解析解对应的极坐标分别为\((n,\theta)\)与\((r,\phi)\)，在几何上关于三架主动机对应圆心角的角平分线对称分布（见图\ref{q1_3}）。特别地，当被动机位于该角平分线的延长线上时，两个解将重合（见图\ref{q1_4}）。
-
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{example-image-a} 
-    \caption{两组解的对称分布示意图}  
-    \label{q1_3}    
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{../../figure/q1_3.png} 
+        \caption{两组解的对称分布示意图}
+        \label{q1_3}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.86\textwidth]{../../figure/q1_4.png} 
+        \caption{解的重合情况示意图}
+        \label{q1_4}   
+    \end{minipage}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{example-image-b} 
-    \caption{解的重合情况示意图}
-    \label{q1_4}   
-\end{figure}
 
-为唯一确定被动机位置，提出以下合理假设：被动接收信号的无人机已知自身对应的编号。在实际应用中，特定编号的无人机通常对应固定的遥控设备，因此该假设具有现实依据。
+由于无法直接确定\(\alpha\)、\(\beta\)分别对应哪两台主动机发射的信号，因此会产生两个可能的位置解。为确定实际位置，假设主动机信号的发射次序已知，被动接收信号的无人机已知自身对应的编号，这一假设在实际场景中具有合理性。
 
 以图 \ref{q1_4} 为例，FY07 为被动机，FY00、FY04、FY01 为主动机。当被动机位置存在微小偏差时，$\alpha$与$\beta$近似相等。由于传感器的无源特性，FY07 仅能接收方向信息，无法识别$\alpha$和$\beta$对应的主动机编号，因此可能位于图中的 M、N 两点。
 
 为排除虚假位置、确定真实位置，可利用信号源的非同步发射特性 —— 假设信号发射存在时间次序，那么 FY07 接收的信号将具有时序特征。基于这一特征可识别$\alpha$和$\beta$对应的主动机，从而唯一确定被动机的实际位置.
 
 
-
-\subsubsection{求解结果}
-
-
-
-
 \subsection{问题二的模型建立与求解}
 为确定在已知FY00和FY01为无偏差的主动机的前提下，确定还需要几架主动机可以实现对被动机的有效定位，我们先证明一个引理：得出已知三点及两个与未知点的夹角可以确定该点的位置。基于次引理可再证明只需再加一架主动机便可实现对被动机的有效定位。
 \subsubsection{模型建立}
-引理的证明：假定我们已知点A，B的位置以及与未知点P的夹角$\theta$，我们可以通过几何关系得出点P的轨迹为以AB为弦的两端圆弧，如图\ref{q1_4}所示即为点P的轨迹。接下来我们再引入点U，已知PU与PB的夹角$\beta$，我们可以通过几何关系得出点P的轨迹为以BU为弦的两端圆弧。由此可得出点P两个轨迹的交点即为点P的确切位置，P的具体位置如图\ref{q1_3}所示。至此，证毕。
+引理的证明：假定我们已知点A，B的位置以及与未知点P的夹角$\theta$，我们可以通过几何关系得出点P的轨迹为以AB为弦的两端圆弧，如图\ref{q2_1}所示即为点P的轨迹。接下来我们再引入点U，已知PU与PB的夹角$\beta$，我们可以通过几何关系得出点P的轨迹为以BU为弦的两端圆弧。由此可得出点P两个轨迹的交点即为点P的确切位置，P的具体位置如图\ref{q2_2}所示。至此，证毕。
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{../../figure/q2_1.png} 
+        \caption{主动机与被动机排布的情况1}
+        \label{q2_1}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{../../figure/q2_2.png} 
+        \caption{主动机与被动机排布的情况2}
+        \label{q2_2}   
+    \end{minipage}
+\end{figure}
+
 \subsubsection{问题求解}
 我们把引理代入到本题中，已知FY00和FY01为主动机，且与被动机的夹角为发射信号，发射信号已知，因此可以确定被动机的轨迹。接下来引入第三架主动机FY02，已知FY02与FY00或FY01与被动机的夹角，通过几何关系可以确定被动机的确切位置。但根据我们上述证明，P的确切位置有两个，但是由于被动机再圆周上，因此有一个解是无效解，应舍弃。通过次方法我们实现了对无人机的有效定位。
+
+
+
 \subsection{问题三的模型建立与求解}
+首先对问题中的数据进行预处理，预处理的方法是通过点距离圆心距离与理想位置的对比，将其沿径向调整，以使数据更加接近理想位置的同时，为后续调整减少运算和节约时间。分两种情况建立局部最优模型，构建以方向信息与理想位置的方向信息的差的平方和为目标函数，和以目标函数为和的误差函数，来衡量无人机的调整方案的优劣，最后再通过仿真来验证。
+\subsubsection{数据预处理}
+由题意可得我们可以得到每个无人机的具体数据，将无人机编号为0,1的无人机定义为此圆心和圆上一点来确定该圆周（即认为该两个点为准确的），通过判断圆上其他无人机的位置与该圆周的关系，来沿径向调整，使其更接近理想位置，调整方法如下:将无人机0,1发射的方向信息调整为
 \subsubsection{模型建立}
 \subsubsection{问题求解}
 \subsubsection{求解结果}
@@ -266,21 +284,21 @@
 \section{模型的评价}
 \subsection{模型优点}
 \begin{enumerate}
-    \item ..
-    \item ..
-    \item ..
+    \item 通过简单的数学几何关系求解出问题一的被动机位置，数据结果较准确。
+    \item 模型推广性强，生活中除无人机，还有军事侦查、海上侦查、北斗卫星均适用。
+    \item 问题二的通过数学几何知识调整可以使锥形队伍调整便捷迅速。
 \end{enumerate}
 
 \subsection{模型缺点}
 \begin{enumerate}
-    \item ..
-    \item ..
+    \item 没有考虑环境因素对信号传播的影响，如多径效应、信号衰减等。
+    \item 模型假设主动机与被动机之间的距离较近，未考虑大范围场景下的定位问题。
 \end{enumerate}
 
 \subsection{改进方向}
 \begin{enumerate}
-    \item ..
-    \item ..
+    \item 引入环境因素的影响模型，如多径效应、信号衰减等，以提高定位精度。
+    \item 增加主动机与被动机之间的距离限制，以适应大范围场景下的定位需求。
 \end{enumerate}
 
 % 摘要
