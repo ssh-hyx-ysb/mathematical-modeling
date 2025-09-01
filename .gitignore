@@ -20,6 +20,7 @@ wheels/
 *.synctex.gz
 
 # test files
+test.out.*
 test/
 
 # archive package
@@ -29,4 +30,5 @@ test/
 *.rar
 
 # temp files
+test.temp.*
 temp/
