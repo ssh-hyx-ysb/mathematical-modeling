@@ -110,7 +110,7 @@
 
 % 模型建立与求解
 \section{模型建立与求解}
-\subsection{问题一：建立被动接收信号无人机的定位模型}
+\subsection{问题一的模型建立与求解}
 
 
 根据题意，先以FY00作为圆心，FY00与FY01连线方向为极轴，逆时针为正方向建立极坐标。在该极坐标下进行几何求解，位于圆心的无人机FY00和编队中另 2 架无人机发射信号，由于圆上第一架无人机选取具有任意性，为简化模型，方便计算，以FY01为一架主动机，选取其他任意一架无人机作为主动机，发射信号的无人机位置无偏差且编号已知，可由此确定被动机的位置。
@@ -126,8 +126,8 @@
     \begin{equation}
     \left\{
     \begin{aligned}
-        \frac{R}{\sin\alpha} &= \frac{r}{\sin(\pi - \alpha - \theta + \varphi)} \\
-        \frac{R}{\sin\beta} &= \frac{r}{\sin(\pi - \varphi - \beta)}
+        \frac{R}{\sin\alpha} &= \frac{r_1}{\sin(\pi - \alpha - \theta + \varphi_1)} \\
+        \frac{R}{\sin\beta} &= \frac{r_1}{\sin(\pi - \varphi_1 - \beta)}
     \end{aligned}
     \right.
     \label{式1}
@@ -138,10 +138,10 @@
     由几何关系可得
     \begin{equation}
     \left\{
-    \begin{aligned}
-        \frac{R}{\sin\alpha} &= \frac{r}{\sin(\pi - \alpha + \theta - \varphi)} \\
-        \frac{R}{\sin\beta} &= \frac{r}{\sin(\pi - \varphi - \beta)}
-    \end{aligned}
+        \begin{aligned}
+            \frac{R}{\sin\alpha} &= \frac{r_2}{\sin(\pi - \alpha + \theta - \varphi_2)} \\
+            \frac{R}{\sin\beta} &= \frac{r_2}{\sin(\pi - \varphi_2 - \beta)}
+        \end{aligned}
     \right.
     \label{式2}
     \end{equation}
@@ -149,7 +149,7 @@
 \end{enumerate}
 
 
-$\theta$与$\varphi$的取值范围有$\theta \in[0,\pi)\cap \varphi \in[0,\pi)$，$\theta \in[0,\pi)\cap \varphi \in[\pi,2\pi)$，$\theta \in[\pi,2\pi)\cap \varphi \in[0,\pi)$，$\theta \in[\pi,2\pi)\cap \varphi \in[\pi,2\pi)$四种情况。易证$\theta$与$\varphi$的取值范围不影响数值解的大小，仅影响解的正负，故仅从$\theta$与$\varphi$的大小关系出发进行讨论。上述描述便以$\theta \in[0,\pi]\cap \varphi \in[0,\pi)$为例，其他情况均同理。
+实际上我们要考虑$\theta$与$\varphi$有四种取值范围，$\theta \in[0,\pi)\cap \varphi \in[0,\pi)$，$\theta \in[0,\pi)\cap \varphi \in[\pi,2\pi)$，$\theta \in[\pi,2\pi)\cap \varphi \in[0,\pi)$，$\theta \in[\pi,2\pi)\cap \varphi \in[\pi,2\pi)$四种情况。易证$\theta$与$\varphi$的取值范围不影响数值解的大小，仅影响解的正负，故仅从$\theta$与$\varphi$的大小关系出发进行讨论。上述描述便以$\theta \in[0,\pi]\cap \varphi \in[0,\pi)$为例，其他情况均同理。
 
 
 \begin{figure}[H]
@@ -173,57 +173,85 @@ $\theta$与$\varphi$的取值范围有$\theta \in[0,\pi)\cap \varphi \in[0,\pi)$
 
 \subsubsection{被动机定位模型求解}
 
-将式(\ref{式1})相除可得
+进行情况一$\theta>\varphi$的求解，将式(\ref{式1})相除可得
 
 \begin{equation}
-    \frac{\sin\beta}{\sin\alpha} = \frac{\sin(\pi - \varphi -\beta)}{\sin(\pi - \alpha - \theta + \varphi)}
+    \frac{\sin\beta}{\sin\alpha} = \frac{\sin(\pi - \varphi_1 -\beta)}{\sin(\pi - \alpha - \theta + \varphi_1)}
 \end{equation}
 
 将上式整理得
 
 \begin{equation}
-    \tan\varphi= \frac{\cos\alpha + \cos(\alpha_2 +\theta)}{\sin(\alpha+\theta)- \sin\beta}
+    \tan\varphi_1= \frac{\cos\alpha + \cos(\beta +\theta)}{\sin(\alpha+\theta)- \sin\beta}
 \end{equation}
 
+则上述方程的解为
 
+\begin{equation}
+    \left\{
+        \begin{aligned}
+            \varphi_1 &= \arctan \frac{\cos\alpha+\cos(\beta+\theta)}{\sin\alpha[\sin(\beta+\theta)-\sin\beta]} \\
+            r_1 &= \frac{R \sin(\beta-\varphi_1+\theta)}{\sin\beta}
+        \end{aligned}
+    \right.
+    \label{解1}
+\end{equation}
 
+同理，对情况二$\theta<\varphi$求解可得
 
+\begin{equation}
+    \left\{
+        \begin{aligned}
+            \varphi_2 &= \arctan \frac{\cos\alpha-\cos(\beta-\theta)}{\sin\alpha[\sin(\beta-\theta)-\sin\beta]} \\
+            r_2 &= \frac{R \sin(\beta-\varphi_2-\theta)}{\sin\beta}
+        \end{aligned}
+    \right.
+\end{equation}
 
+在求解过程中，我们得到被动机位置的极坐标解为\((r_1,\varphi_1)\)和\((r_2,\varphi_2)\)。由于无法直接确定\(\alpha\)、\(\beta\)分别对应哪两台主动机发射的信号，因此会产生两个可能的位置解。为确定实际位置，假设主动机信号的发射次序已知，这一假设在实际场景中具有合理性。
 
-
+上述两组解析解对应的极坐标分别为\((n,\theta)\)与\((r,\phi)\)，在几何上关于三架主动机对应圆心角的角平分线对称分布（见图\ref{q1_3}）。特别地，当被动机位于该角平分线的延长线上时，两个解将重合（见图\ref{q1_4}）。
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.5\textwidth]{../../figure/q1_3.png} 
-    \caption{哈哈}  
-    \label{q1_4}    
+    \includegraphics[width=0.5\textwidth]{example-image-a} 
+    \caption{两组解的对称分布示意图}  
+    \label{q1_3}    
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.5\textwidth]{../../figure/q1_4.png} 
-    \caption{哈哈}
-    \label{q1_3}   
+    \includegraphics[width=0.5\textwidth]{example-image-b} 
+    \caption{解的重合情况示意图}
+    \label{q1_4}   
 \end{figure}
+
+为唯一确定被动机位置，提出以下合理假设：被动接收信号的无人机已知自身对应的编号。在实际应用中，特定编号的无人机通常对应固定的遥控设备，因此该假设具有现实依据。
+
+以图 \ref{q1_4} 为例，FY07 为被动机，FY00、FY04、FY01 为主动机。当被动机位置存在微小偏差时，$\alpha$与$\beta$近似相等。由于传感器的无源特性，FY07 仅能接收方向信息，无法识别$\alpha$和$\beta$对应的主动机编号，因此可能位于图中的 M、N 两点。
+
+为排除虚假位置、确定真实位置，可利用信号源的非同步发射特性 —— 假设信号发射存在时间次序，那么 FY07 接收的信号将具有时序特征。基于这一特征可识别$\alpha$和$\beta$对应的主动机，从而唯一确定被动机的实际位置.
+
+
 
 \subsubsection{求解结果}
 
 
 
 
-\subsection{问题二：}
+\subsection{问题二的模型建立与求解}
 为确定在已知FY00和FY01为无偏差的主动机的前提下，确定还需要
 \subsubsection{模型建立}
 \subsubsection{问题求解}
 \subsubsection{求解结果}
 
-\subsection{问题一：}
+\subsection{问题三的模型建立与求解}
 \subsubsection{模型建立}
 \subsubsection{问题求解}
 \subsubsection{求解结果}
 
 
-\subsection{问题二的模型建立与求解}
+\subsection{问题四的模型建立与求解}
 \subsubsection{模型建立}
 \subsubsection{问题求解}
 \subsubsection{求解结果}
