@@ -1,0 +1,11 @@
+ds:
+url:https://api.deepseek.com
+agent:deepseek-chat
+sk-afd902188a5a4c6b9f9b63cefbc7c7f3
+
+ali:
+qwen3-32b
+qwen3-30b-a3b
+qwen3-coder-plus
+qwen3-coder-flash
+sk-e77eeb59eb8d40ff8718d15a9b7b7461
