@@ -120,6 +120,7 @@
         \frac{R}{\sin\beta} &= \frac{r}{\sin(\pi - \varphi - \beta)}
     \end{aligned}
     \right.
+    \label{式1}
     \end{equation}
 
     \item 当$\theta<\varphi$时，无人机分布的其中一种情况如图\ref{q1_2}所示，
@@ -132,6 +133,7 @@
         \frac{R}{\sin\beta} &= \frac{r}{\sin(\pi - \varphi - \beta)}
     \end{aligned}
     \right.
+    \label{式2}
     \end{equation}
     
 \end{enumerate}
@@ -157,9 +159,17 @@ $\theta$与$\varphi$的取值范围有$\theta \in[0,\pi)\cap \varphi \in[0,\pi)$
 
 \subsubsection{被动机定位模型求解}
 
-将式\
+将式(\ref{式1})相除可得
 
+\begin{equation}
+    \frac{\sin\beta}{\sin\alpha} = \frac{\sin(\pi - \varphi -\beta)}{\sin(\pi - \alpha - \theta + \varphi)}
+\end{equation}
 
+将上式整理得
+
+\begin{equation}
+    \tan\varphi= \frac{\cos\alpha + \cos(\alpha_2 +\theta)}{\sin(\alpha+\theta)- \sin\beta}
+\end{equation}
 
 
 
