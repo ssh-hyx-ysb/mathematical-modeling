@@ -113,3 +113,18 @@ def optimized_eqs(
     except NotImplementedError:
         print("符号求解失败，建议使用数值方法")
         return None
+
+
+if __name__ == "__main__":
+    e1 = optimized_eqs(
+        x1_val=0,
+        y1_val=0,
+        x2_val=100,
+        y2_val=0,
+        x3_val=30,
+        y3_val=90,  # 例如等边三角形
+        alpha1_deg=30,
+        alpha2_deg=30,
+        alpha3_deg=60,
+    )
+    print(e1)
