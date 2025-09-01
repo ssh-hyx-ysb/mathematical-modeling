@@ -195,12 +195,6 @@ $\theta$与$\varphi$的取值范围有$\theta \in[0,\pi)\cap \varphi \in[0,\pi)$
     \label{q1_4}    
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{../../figure/q1_4.png} 
-    \caption{哈哈}
-    \label{q1_3}   
-\end{figure}
 
 \subsubsection{求解结果}
 
@@ -209,7 +203,25 @@ $\theta$与$\varphi$的取值范围有$\theta \in[0,\pi)\cap \varphi \in[0,\pi)$
 
 \subsection{问题一：}
 \subsubsection{模型建立}
+
+我们先证明结论1：如果已知三个点及三点对于未知点的夹角，可以求出未知点的具体位置，证明过程如下：
+假设我们已知点A、B的坐标，在平面上存在一点P，使得∠APB=theta，根据圆的性质：同一条弦 所对应的圆周角相等，可得P的轨迹是以AB为弦长的圆弧，可以确定P的轨迹为两条圆弧，此时点P的轨迹如图几所示，有无数个位置，只能确定其轨迹，无法确定具体位置，此时我们引入一点U,U的坐标已知，使得∠APU=theta，同理可得P的轨迹也是以AU为弦长的的两端圆弧，此时四段圆弧的轨迹如图几所示，可以看出此时四段圆弧有两个除A外的交点，此时便可以确定P的具体位置，再根据要求进一步确定P的位置。
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../../figure/q1_4.png} 
+    \caption{哈哈}
+    \label{q1_3}   
+\end{figure}
+
 \subsubsection{问题求解}
+
+再回到原题证明只需在已知FY00和FY01的作为主动机的基础上只需要一个无人机发射信号即可实现对无人机的有效定位，证明过程如下:
+我们还是在问题一的原有极坐标系下已知FY00和FY01的坐标，假如我们要求i号机的具体位置，利用00和01对i号机的发射信号来确定:∠0i1，根据结论1我们可以知道i的轨迹为以01为弦长的两段圆弧，下面我们引入一架无人机j为主动机，我们可以得到发射信号∠1ij，我们可以得到i的轨迹为以1j为弦长的两端圆弧，我们便得到了两个关于i的运动轨迹，我们要同时满足i的两个不同的运动轨迹可知满足的点只有一个，但根据无人机编排在正九边形的端点上，我们很容易可以排除无效点的位置，从而得到真实的被动机的位置，实现对无人机的有效定位。
+
+
+
 \subsubsection{求解结果}
 
 \subsection{问题一：}
