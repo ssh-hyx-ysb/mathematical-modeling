@@ -1,5 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.font_manager import fontManager as fm
+
+fm.addfont("/usr/share/fonts/truetype/win/simkai.ttf")
+fm.addfont("/usr/share/fonts/truetype/win/STSONG.TTF")
+plt.rcParams["font.sans-serif"] = ["STSONG", "SimKai"]
+plt.rcParams["axes.unicode_minus"] = False
 
 
 def plot_line(base_point, other_points):
@@ -23,4 +29,5 @@ if __name__ == "__main__":
     color = "#FF0000"
     plt.figure(figsize=(8, 8))
     circle(center, radius, color)
+    plt.title("圆：center(0,0) radius=10")
     plt.savefig("figure/test.out.png")
