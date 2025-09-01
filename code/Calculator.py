@@ -73,7 +73,7 @@ def get_angle(p1, p2, p):
 def location(ps, p):
     alpha_1 = get_angle(ps[0], ps[1], p)
     alpha_2 = get_angle(ps[0], ps[2], p)
-    alpha_3 = get_angle(ps[2], ps[1], p)
+    alpha_3 = get_angle(ps[1], ps[2], p)
     return alpha_1, alpha_2, alpha_3
 
 

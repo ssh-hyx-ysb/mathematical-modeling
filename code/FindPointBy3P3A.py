@@ -128,3 +128,96 @@ if __name__ == "__main__":
         alpha3_deg=60,
     )
     print(e1)
+
+distance = sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
+
+def eqs(
+    x_1=0, x_2=0, x_3=100, y_1=0, y_2=100, y_3=0, alpha_1=30, alpha_2=30, alpha_3=60
+):
+
+    equation_1_1 = (
+        distance.subs([(x1, x), (x2, x_1), (y1, y), (y2, y_1)]) ** 2
+        + distance.subs([(x1, x), (x2, x_2), (y1, y), (y2, y_2)]) ** 2
+        - distance.subs([(x1, x_1), (x2, x_2), (y1, y_1), (y2, y_2)]) ** 2
+    ) / (
+        2
+        * distance.subs([(x1, x), (x2, x_1), (y1, y), (y2, y_1)])
+        * distance.subs([(x1, x), (x2, x_2), (y1, y), (y2, y_2)])
+    ) - cos(
+        alpha_1 * 2 * pi / 360
+    )
+    equation_1_2 = (
+        distance.subs([(x1, x), (x2, x_1), (y1, y), (y2, y_1)]) ** 2
+        + distance.subs([(x1, x), (x2, x_2), (y1, y), (y2, y_2)]) ** 2
+        - distance.subs([(x1, x_1), (x2, x_2), (y1, y_1), (y2, y_2)]) ** 2
+    ) / (
+        2
+        * distance.subs([(x1, x), (x2, x_1), (y1, y), (y2, y_1)])
+        * distance.subs([(x1, x), (x2, x_2), (y1, y), (y2, y_2)])
+    ) - cos(
+        pi - (alpha_1 * 2 * pi / 360)
+    )
+    equation_2_1 = (
+        distance.subs([(x1, x), (x2, x_1), (y1, y), (y2, y_1)]) ** 2
+        + distance.subs([(x1, x), (x2, x_3), (y1, y), (y2, y_3)]) ** 2
+        - distance.subs([(x1, x_1), (x2, x_3), (y1, y_1), (y2, y_3)]) ** 2
+    ) / (
+        2
+        * distance.subs([(x1, x), (x2, x_1), (y1, y), (y2, y_1)])
+        * distance.subs([(x1, x), (x2, x_3), (y1, y), (y2, y_3)])
+    ) - cos(
+        alpha_2 * 2 * pi / 360
+    )
+    equation_2_2 = (
+        distance.subs([(x1, x), (x2, x_1), (y1, y), (y2, y_1)]) ** 2
+        + distance.subs([(x1, x), (x2, x_3), (y1, y), (y2, y_3)]) ** 2
+        - distance.subs([(x1, x_1), (x2, x_3), (y1, y_1), (y2, y_3)]) ** 2
+    ) / (
+        2
+        * distance.subs([(x1, x), (x2, x_1), (y1, y), (y2, y_1)])
+        * distance.subs([(x1, x), (x2, x_3), (y1, y), (y2, y_3)])
+    ) - cos(
+        pi - (alpha_2 * 2 * pi / 360)
+    )
+    equation_3_1 = (
+        distance.subs([(x1, x), (x2, x_2), (y1, y), (y2, y_2)]) ** 2
+        + distance.subs([(x1, x), (x2, x_3), (y1, y), (y2, y_3)]) ** 2
+        - distance.subs([(x1, x_2), (x2, x_3), (y1, y_2), (y2, y_3)]) ** 2
+    ) / (
+        2
+        * distance.subs([(x1, x), (x2, x_2), (y1, y), (y2, y_2)])
+        * distance.subs([(x1, x), (x2, x_3), (y1, y), (y2, y_3)])
+    ) - cos(
+        alpha_3 * 2 * pi / 360
+    )
+    equation_3_2 = (
+        distance.subs([(x1, x), (x2, x_2), (y1, y), (y2, y_2)]) ** 2
+        + distance.subs([(x1, x), (x2, x_3), (y1, y), (y2, y_3)]) ** 2
+        - distance.subs([(x1, x_2), (x2, x_3), (y1, y_2), (y2, y_3)]) ** 2
+    ) / (
+        2
+        * distance.subs([(x1, x), (x2, x_2), (y1, y), (y2, y_2)])
+        * distance.subs([(x1, x), (x2, x_3), (y1, y), (y2, y_3)])
+    ) - cos(
+        pi - (alpha_3 * 2 * pi / 360)
+    )
+
+    result_1 = solve([equation_1_1, equation_2_1, equation_3_1], [x, y])
+    result_2 = solve([equation_1_1, equation_2_1, equation_3_2], [x, y])
+    result_3 = solve([equation_1_1, equation_2_2, equation_3_1], [x, y])
+    result_4 = solve([equation_1_2, equation_2_1, equation_3_1], [x, y])
+    result_5 = solve([equation_1_1, equation_2_2, equation_3_2], [x, y])
+    result_6 = solve([equation_1_2, equation_2_1, equation_3_2], [x, y])
+    result_7 = solve([equation_1_2, equation_2_2, equation_3_1], [x, y])
+    result_8 = solve([equation_1_2, equation_2_2, equation_3_2], [x, y])
+    return (
+        result_1,
+        result_2,
+        result_3,
+        result_4,
+        result_5,
+        result_6,
+        result_7,
+        result_8,
+    )
