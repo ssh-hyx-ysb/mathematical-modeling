@@ -76,9 +76,9 @@
 \section{模型假设}
 
 \begin{enumerate}
-    \item ..
-    \item ..
-    \item ..
+    \item 无人机知道自己的编号。
+    \item 无人机主动机发射信号有次序，不是同时发射。
+    \item 无人机调整方向为任意的。
 \end{enumerate}
 
 % 符号说明
@@ -99,34 +99,85 @@
 
 % 模型建立与求解
 \section{模型建立与求解}
-\subsection{问题一的模型建立与求解}
-\subsubsection{模型建立}
+\subsection{问题一：建立被动接收信号无人机
+的定位模型}
 
+
+根据题意，先以FY00作为圆心，FY00与FY01连线方向为极轴，逆时针为正方向建立极坐标。在该极坐标下进行几何求解，位于圆心的无人机FY00和编队中另 2 架无人机发射信号，由于圆上第一架无人机选取具有任意性，为简化模型，方便计算，以FY01为一架主动机，选取其他任意一架无人机作为主动机，发射信号的无人机位置无偏差且编号已知，可由此确定被动机的位置。
+
+\subsubsection{被动机定位模型建立}
+
+根据我们建立的极坐标系，$R$为九架无人机分布圆的半径，可知FY00和FY01的极坐标分别为$(0,0)$，$(R,0)$，设另一架主动机$i$的极坐标为$(R,\theta)$，其中$\theta$已知，设接收信号的被动机$j$极坐标为$(r,\varphi)$，其中$(r)$与$(\varphi)$均未知。根据题意可知接收信号的被动机位置有如下两种情况：
+
+\begin{enumerate}
+    \item 当$\theta>\varphi$时，无人机分布的其中一种情况如图\ref{q1_1}所示，
+
+    由几何关系可得
+    \begin{equation}
+    \left\{
+    \begin{aligned}
+        \frac{R}{\sin\alpha} &= \frac{r}{\sin(\pi - \alpha - \theta + \varphi)} \\
+        \frac{R}{\sin\beta} &= \frac{r}{\sin(\pi - \varphi - \beta)}
+    \end{aligned}
+    \right.
+    \end{equation}
+
+    \item 当$\theta<\varphi$时，无人机分布的其中一种情况如图\ref{q1_2}所示，
+    
+    由几何关系可得
+    \begin{equation}
+    \left\{
+    \begin{aligned}
+        \frac{R}{\sin\alpha} &= \frac{r}{\sin(\pi - \alpha + \theta - \varphi)} \\
+        \frac{R}{\sin\beta} &= \frac{r}{\sin(\pi - \varphi - \beta)}
+    \end{aligned}
+    \right.
+    \end{equation}
+    
+\end{enumerate}
+
+
+$\theta$与$\varphi$的取值范围有$\theta \in[0,\pi)\cap \varphi \in[0,\pi)$，$\theta \in[0,\pi)\cap \varphi \in[\pi,2\pi)$，$\theta \in[\pi,2\pi)\cap \varphi \in[0,\pi)$，$\theta \in[\pi,2\pi)\cap \varphi \in[\pi,2\pi)$四种情况。易证$\theta$与$\varphi$的取值范围不影响数值解的大小，仅影响解的正负，故仅从$\theta$与$\varphi$的大小关系出发进行讨论。上述描述便以$\theta \in[0,\pi]\cap \varphi \in[0,\pi)$为例，其他情况均同理。
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{../../figure/q1_1.png} 
+    \includegraphics[width=0.5\textwidth]{../../figure/q1_1.png} 
     \caption{主动机与被动机排布的情况1}
+    \caption*{\small 注：主动机发射的方向信息$\alpha$为$(i,0)$的夹角，$\beta$为$(0,1)$的夹角，图\ref{q1_2}同理。}
     \label{q1_1}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{../../figure/q1_2.png} 
+    \includegraphics[width=0.5\textwidth]{../../figure/q1_2.png} 
     \caption{主动机与被动机排布的情况2}
     \label{q1_2}   
 \end{figure}
 
+
+\subsubsection{被动机定位模型求解}
+
+将式\
+
+
+
+
+
+
+
+
+
+
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.95\textwidth]{../../figure/q1_4.png} 
-    \caption{方案一对应的流程图}  
+    \includegraphics[width=0.5\textwidth]{../../figure/q1_3.png} 
+    \caption{哈哈}  
     \label{q1_4}    
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{../../figure/q1_3.png} 
+    \includegraphics[width=0.5\textwidth]{../../figure/q1_4.png} 
     \caption{哈哈}
     \label{q1_3}   
 \end{figure}
