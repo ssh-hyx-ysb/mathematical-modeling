@@ -485,9 +485,55 @@ $f_3$ 下标为对应无人机编号。依此，其余待调整无人机目标�
 
 
 \subsection{问题四的模型建立与求解}
+仍考虑纯方位无源定位的情形，设计无人机位置调整方案，我们依然可以使用简单的数学几何关系进行建模。
 \subsubsection{模型建立}
+\subsection*{引理1}
+给定空间中近似为正三角形的三点 \( A, B, C \)，以及在边 \( AC \) 附近的一点 \( D \)，可通过\textbf{三步微调}将 \( \triangle ABC \) 调整为\textbf{严格正三角形}（调整过程中点 \( B \) 始终不动，且最终 \( D \) 落在边 \( AC \) 上）：
+
+\noindent \textbf{第一步：调整点 \( D \)（保持 \( A, B, C \) 不动）}
+固定点 \( A, B, C \) 的位置，调整点 \( D \)，使 \( \angle ADC = 180^\circ \)，从而让 \( D \) 落在边 \( AC \) 上。
+
+\noindent \textbf{第二步：调整点 \( C \)（保持 \( A, B, D \) 不动）}
+固定点 \( A, B, D \) 的位置，调整点 \( C \)，使 \( \angle ACD = 0^\circ \)（即 \( C \) 落在边 \( AD \) 上），且 \( \angle DCB = \angle BCA = 60^\circ \)，从而保证 \( \triangle ABC \) 中 \( \angle C = 60^\circ \)。
+
+\noindent \textbf{第三步：调整点 \( A \)（保持 \( B, D, C \) 不动）}
+固定点 \( B, D, C \) 的位置，调整点 \( A \)，使 \( \angle CAD = 0^\circ \)（即 \( A \) 落在边 \( CD \) 的延长线上），且 \( \angle DAB = \angle BCA = 60^\circ \)，从而保证 \( \triangle ABC \) 中 \( \angle A = 60^\circ \)。
+
+通过上述三步，可在原位置附近将 \( \triangle ABC \) 微调为严格正三角形（记为 \( \triangle AB'C' \)），且最终点 \( D \) 位于边 \( AC \) 上。
+\subsection*{引理1}
+给定空间中近似成正三角形的三个点\( A,B,C \)，与一在边\( AC \)附近的点\( D \)，对于任意\( \lambda \in [0, +\infty] \)，可以将点调到边\( AC \)上，且满足\( AD/DC = \lambda \)。
+
+当点\( D \)在边\( AC \)上，且满足\( AD/DC = \lambda \)时，根据正三角形几何关系易求
+\[
+\angle ADB = \arccos \frac{\lambda - 1}{2\sqrt{\lambda^2 + \lambda + 1}}
+\]
+
+调整方案如下：点\( A,B,C \)不动，微调点\( D \)，控制：
+\[
+\angle ADC = 0^\circ, \quad \angle ADB = \arccos \frac{\lambda - 1}{2\sqrt{\lambda^2 + \lambda + 1}}
+\]
+使得点\( D \)在边\( AC \)上且满足\( AD/DC = \lambda \)。
+\subsection*{引理3} 
+给定空间中成正三角形的三个点\(A,B,C\)，与在\(\triangle ABC\)中心附近的点D，可通过微调使得D是\(\triangle ABC\)的中心。点\(A,B,C\)不动，微调点D。控制
+\(\angle ADB = \angle BDC = \angle CDA = 120^\circ\)
+即可使点D为\(\triangle ABC\)的中心。证明是显然的：由于此时\(\angle ADB + \angle BDC + \angle CDA = 360^\circ\)，故点D在平面ABC内；由 F 定理，平面上满足\(\angle ADB = \angle BDC = \angle CDA = 120^\circ\)的点只有一个 —— 费马（FERMAT）点；又因为\(\triangle ABC\)是正三角形，其费马点即为中心，从而点D为\(\triangle ABC\)的中心。
 \subsubsection{问题求解}
-\subsubsection{求解结果}
+通过上述三个引理，我们可以利用引理调整阵列使其为严格锥形编队，具体调整流畅如下：
+先利用引理1，将最外面三个点调整为正三角形的同时将三角形边上的点调整到边上；然后利用引理2，将边上的点调整为等分点；最后利用引理3，将中间的点调整为三角形的中心。通过上述三步，我们可以将近似锥形阵列调整为严格锥形阵列。至此我们便完成了问题四的理论求解。
+\subsubsection{问题四的仿真}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../../figure/start_4.png} 
+    \caption{仿真的初始位置}
+    \label{q4_2}    
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../../figure/end_4.png} 
+    \caption{仿真的初始位置}
+    \label{q4_2}    
+\end{figure}
+
 
 % 模型的分析与检验
 \section{模型的分析与检验}
