@@ -35,9 +35,9 @@ def optimized_eqs(
 ):
     """
     求解点 P(x,y) 使得：
-        ∠APB = alpha1
-        ∠BPC = alpha2
-        ∠CPA = alpha3
+        APB = alpha1
+        BPC = alpha2
+        CPA = alpha3
     """
 
     # 转换为弧度
@@ -57,15 +57,15 @@ def optimized_eqs(
     # 使用余弦定理建立方程（避免分母嵌套 sqrt）
     # 但注意：仍有 sqrt，所以考虑平方两边（需小心增根）
 
-    # 方程1: ∠APB = alpha1
+    # 方程1: APB = alpha1
     cos_APB = cos_rule_expr(dPA_sq, dPB_sq, dAB_sq)
     eq1 = Eq(cos_APB, cos(alpha1_rad))
 
-    # 方程2: ∠BPC = alpha2
+    # 方程2: BPC = alpha2
     cos_BPC = cos_rule_expr(dPB_sq, dPC_sq, dBC_sq)
     eq2 = Eq(cos_BPC, cos(alpha2_rad))
 
-    # 方程3: ∠CPA = alpha3
+    # 方程3: CPA = alpha3
     cos_CPA = cos_rule_expr(dPC_sq, dPA_sq, dCA_sq)
     eq3 = Eq(cos_CPA, cos(alpha3_rad))
 
