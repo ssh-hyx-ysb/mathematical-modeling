@@ -21,3 +21,12 @@ wheels/
 
 # test files
 test/
+
+# archive package
+*.tar.*
+*.zip
+*.7z
+*.rar
+
+# temp files
+temp/
