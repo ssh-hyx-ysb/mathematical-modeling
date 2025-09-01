@@ -73,6 +73,7 @@
 \section{问题分析}
 
 \subsection{问题一分析}
+该问题的本质是一个简单的几何求解过程，根据圆上一点的任意性固定一个点同时假设另一点的极坐标，利用方向信息和正弦定理求解被动机的位置，考虑到被动机和圆上主动机的位置关系，可以分为两种情况求解，同时为了简化模型求解，方便计算，设定主动机与被动机的角度范围求出其在一般情况下的解，再根据我们假设的发射信号的先后顺序确定我们所需要的无人机位置的解，从而实现对无人机的有效定位。
 
 \subsection{问题二分析}
 
@@ -146,20 +147,24 @@
 
 $\theta$与$\varphi$的取值范围有$\theta \in[0,\pi)\cap \varphi \in[0,\pi)$，$\theta \in[0,\pi)\cap \varphi \in[\pi,2\pi)$，$\theta \in[\pi,2\pi)\cap \varphi \in[0,\pi)$，$\theta \in[\pi,2\pi)\cap \varphi \in[\pi,2\pi)$四种情况。易证$\theta$与$\varphi$的取值范围不影响数值解的大小，仅影响解的正负，故仅从$\theta$与$\varphi$的大小关系出发进行讨论。上述描述便以$\theta \in[0,\pi]\cap \varphi \in[0,\pi)$为例，其他情况均同理。
 
-\begin{figure}[htbp]
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{../../figure/q1_1.png} 
-    \caption{主动机与被动机排布的情况1}
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{../../figure/q1_1.png} 
+        \caption{主动机与被动机排布的情况1}
+        \label{q1_1}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.86\textwidth]{../../figure/q1_2.png} 
+        \caption{主动机与被动机排布的情况2}
+        \label{q1_2}   
+    \end{minipage}
     \caption*{\small 注：主动机发射的方向信息$\alpha$为$(i,0)$的夹角，$\beta$为$(0,1)$的夹角，图\ref{q1_2}同理。}
-    \label{q1_1}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{../../figure/q1_2.png} 
-    \caption{主动机与被动机排布的情况2}
-    \label{q1_2}   
-\end{figure}
 
 
 \subsubsection{被动机定位模型求解}
