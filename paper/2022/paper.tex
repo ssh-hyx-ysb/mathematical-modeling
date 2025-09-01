@@ -212,20 +212,22 @@
 
 上述两组解析解对应的极坐标分别为\((n,\theta)\)与\((r,\phi)\)，在几何上关于三架主动机对应圆心角的角平分线对称分布（见图\ref{q1_3}）。特别地，当被动机位于该角平分线的延长线上时，两个解将重合（见图\ref{q1_4}）。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{example-image-a} 
-    \caption{两组解的对称分布示意图}  
-    \label{q1_3}    
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{../../figure/q1_1.png} 
+        \caption{主动机与被动机排布的情况1}
+        \label{q1_1}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.86\textwidth]{../../figure/q1_2.png} 
+        \caption{主动机与被动机排布的情况2}
+        \label{q1_2}   
+    \end{minipage}
+    \caption*{\small 注：主动机发射的方向信息$\alpha$为$(i,0)$的夹角，$\beta$为$(0,1)$的夹角，图\ref{q1_2}同理。}
 \end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{example-image-b} 
-    \caption{解的重合情况示意图}
-    \label{q1_4}   
-\end{figure}
-
 为唯一确定被动机位置，提出以下合理假设：被动接收信号的无人机已知自身对应的编号。在实际应用中，特定编号的无人机通常对应固定的遥控设备，因此该假设具有现实依据。
 
 以图 \ref{q1_4} 为例，FY07 为被动机，FY00、FY04、FY01 为主动机。当被动机位置存在微小偏差时，$\alpha$与$\beta$近似相等。由于传感器的无源特性，FY07 仅能接收方向信息，无法识别$\alpha$和$\beta$对应的主动机编号，因此可能位于图中的 M、N 两点。
@@ -242,9 +244,33 @@
 \subsection{问题二的模型建立与求解}
 为确定在已知FY00和FY01为无偏差的主动机的前提下，确定还需要几架主动机可以实现对被动机的有效定位，我们先证明一个引理：得出已知三点及两个与未知点的夹角可以确定该点的位置。基于次引理可再证明只需再加一架主动机便可实现对被动机的有效定位。
 \subsubsection{模型建立}
-引理的证明：假定我们已知点A，B的位置以及与未知点P的夹角$\theta$，我们可以通过几何关系得出点P的轨迹为以AB为弦的两端圆弧，如图\ref{q1_4}所示即为点P的轨迹。接下来我们再引入点U，已知PU与PB的夹角$\beta$，我们可以通过几何关系得出点P的轨迹为以BU为弦的两端圆弧。由此可得出点P两个轨迹的交点即为点P的确切位置，P的具体位置如图\ref{q1_3}所示。至此，证毕。
+引理的证明：假定我们已知点A，B的位置以及与未知点P的夹角$\theta$，我们可以通过几何关系得出点P的轨迹为以AB为弦的两端圆弧，如图\ref{q2_1}所示即为点P的轨迹。接下来我们再引入点U，已知PU与PB的夹角$\beta$，我们可以通过几何关系得出点P的轨迹为以BU为弦的两端圆弧。由此可得出点P两个轨迹的交点即为点P的确切位置，P的具体位置如图\ref{q2_2}所示。至此，证毕。
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.75\textwidth]{../../figure/q2_1.png} 
+        \caption{主动机与被动机排布的情况1}
+        \label{q2_1}
+    \end{minipage}
+    \begin{minipage}{0.49\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{../../figure/q2_2.png} 
+        \caption{主动机与被动机排布的情况2}
+        \label{q2_2}   
+    \end{minipage}
+\end{figure}
+
 \subsubsection{问题求解}
 我们把引理代入到本题中，已知FY00和FY01为主动机，且与被动机的夹角为发射信号，发射信号已知，因此可以确定被动机的轨迹。接下来引入第三架主动机FY02，已知FY02与FY00或FY01与被动机的夹角，通过几何关系可以确定被动机的确切位置。但根据我们上述证明，P的确切位置有两个，但是由于被动机再圆周上，因此有一个解是无效解，应舍弃。通过次方法我们实现了对无人机的有效定位。
+
+
+
+
+
+
+
 \subsection{问题三的模型建立与求解}
 \subsubsection{模型建立}
 \subsubsection{问题求解}
