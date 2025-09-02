@@ -100,7 +100,7 @@ for frame in range(num_frames):
 df = pd.DataFrame(data)
 
 # -------------------------------
-# ✅ 使用 pd.concat() 添加初始和终止状态
+# 使用 pd.concat() 添加初始和终止状态
 # -------------------------------
 
 # 创建初始状态数据
