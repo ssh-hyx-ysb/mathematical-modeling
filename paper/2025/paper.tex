@@ -12,19 +12,19 @@
 \usepackage{tabularx}
 \usepackage{float}
 \usepackage[numbers]{natbib}
-\usepackage[table]{xcolor}
+\usepackage[table]{xcolor}      % 颜色选项
 
-\title{基于长短期记忆网络(LSTM)的蔬菜补货与定价决策模型}
+\title{基于 的 模型}
 \tihao{A}
-\baominghao{1234}
-\schoolname{XX大学}
-\membera{yby}
-\memberb{hyx}
-\memberc{ssh}
-\supervisor{老师}
+\baominghao{}
+\schoolname{中原工学院}
+\membera{}
+\memberb{}
+\memberc{}
+\supervisor{魏冰蔗}
 \yearinput{2025}
-\monthinput{08}
-\dayinput{29}
+\monthinput{09}
+\dayinput{07}
 
 
 \begin{document}
@@ -34,6 +34,7 @@
 \nocite{*}
 \bibliographystyle{gbt7714-numerical}
 
+% 第三条 论文第三页为摘要专用页。摘要内容（含标题和关键词，无需翻译成英文）不能超过一页；论文从此页开始编写页码，页码位于页脚中部，用阿拉伯数字从“1”开始连续编号。
 \begin{abstract}
 本文
 
@@ -48,6 +49,7 @@
     \keywords{'xx'\quad'xx'}
 \end{abstract}
 
+% 论文从第四页开始是正文内容（不要目录，尽量控制在20页以内）；正文之后是论文附录（页数不限），附录内容必须打印并与正文装订在一起提交。
 % 问题背景与重述
 \section{问题重述}
 
@@ -87,27 +89,18 @@
 % 表结构
 \begin{table}[H]
     \centering  % 表居中
-    \caption{这是表标题}  % 表标题
+    \caption{符号说明详表}  % 表标题
     \label{tab:表标签}  % 表标签
 
     % 表内容
-    \begin{tabular}{|p{3cm}|b{1cm}|m{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}
+    \begin{tabularx}{\textwidth}{p{0.2\textwidth} p{0.6\textwidth} c}
         \toprule[1.5pt]
-
-        \multicolumn{3}{c}{text} & 4 & 5 & 6& 7  \\
-
+        \textbf{符号} & \textbf{说明} & \textbf{单位} \\ 
         \midrule[1pt]
-
-         \color{gray!15}\multirow{4}{2cm}{It is a long text with all of the world} &  2 & 3 & 4 & 5 & 6 & 7  \\
-         &  2 & 3  & 4 & 5 & 6 & 7  \\
-          &  2 & 3 & 4 & 5 & 6 & 7  \\
-         &  2 & 3 & 4 & 5 & 6 & 7  \\
-        1 & 2 & 3 & 4 & 5 & 6 & 7  \\
-        1 & 2 & 3 & 4 & 5 & 6 & 7  \\
-        1 & 2 & 3 & 4 & 5 & 6 & 7  \\
-
-        % \bottomrule[1.5pt]
-    \end{tabular}
+        $A, B, C, ...$ & 几何图形点 & - \\
+        $\alpha, \beta, \gamma, ...$ & 几何图形夹角 & rad \\
+        \bottomrule[1.5pt]
+    \end{tabularx}
     
 
 \end{table}
@@ -117,17 +110,17 @@
 
 % 模型建立与求解
 \section{模型建立与求解}
-\subsection{问题一的模型建立与求解}
+\subsection{问题一}
 \subsubsection{模型建立}
 \subsubsection{问题求解}
 \subsubsection{求解结果}
 
-\subsection{问题二的模型建立与求解}
+\subsection{问题二}
 \subsubsection{模型建立}
 \subsubsection{问题求解}
 \subsubsection{求解结果}
 
-\subsection{问题三的模型建立与求解}
+\subsection{问题三}
 \subsubsection{模型建立}
 \subsubsection{问题求解}
 \subsubsection{求解结果}
@@ -159,11 +152,12 @@
     \item 
 \end{enumerate}
 
-% 摘要
+% 所有引用他人或公开资料(包括网上资料)的成果必须按照科技论文的规范列出参考文献，并在正文引用处予以标注。
 \bibliography{ref}
 
+\newpage
 % 附录
-
+% 论文附录内容应包括支撑材料的文件列表，建模所用到的全部完整、可运行的源程序代码（含EXCEL、SPSS等软件的交互命令）等。如果缺少必要的源程序、程序不能运行或运行结果与论文不符，都可能会被取消评奖资格。如果确实没有用到程序，应在论文附录中明确说明“本论文没有用到程序”。
 \begin{appendices}
 
 \section{运行结果}
