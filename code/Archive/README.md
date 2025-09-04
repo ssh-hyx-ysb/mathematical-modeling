@@ -149,9 +149,9 @@ XXX$行内公式$XXX
 ```latex
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{图片路径} % 以70%文件宽引用并显示位于`图片路径`下的图片
+    \includegraphics[width=0.9\textwidth]{图片路径} % 以70%文件宽引用并显示位于`图片路径`下的图片
     \caption{图片标题}  % 显示在图片下的标题
-    \label{图片标签}    % 引用时显示此图片的序号
+    \label{fig:图片标签}    % 引用时显示此图片的序号
 \end{figure}
 ```
 
