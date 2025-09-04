@@ -62,7 +62,7 @@
 
 \textbf{问题1：}
 
-\textbf{问题2：}
+\textbf{问题2：}根据问题一建立起的厚度计算模型，
 
 \textbf{问题3：}
 
@@ -79,9 +79,9 @@
 \section{模型假设}
 
 \begin{enumerate}
-    \item ..
-    \item ..
-    \item ..
+    \item 
+    \item 
+    \item 
 \end{enumerate}
 
 % 符号说明
@@ -91,15 +91,18 @@
 \begin{table}[H]
     \centering  % 表居中
     \caption{符号说明详表}  % 表标题
-    \label{tab:表标签}  % 表标签
+    \label{tab:符号说明}  % 表标签
     \begin{threeparttable}
         % 表内容
-        \begin{tabularx}{\textwidth}{p{0.2\textwidth} p{0.6\textwidth} c}
+        \begin{tabularx}{\textwidth}{p{0.15\textwidth} p{0.7\textwidth} l}
             \toprule[1.5pt]
             \textbf{符号} & \textbf{说明} & \textbf{单位} \\ 
             \midrule[1pt]
-            $A, B, C, ...$ & 几何图形点 & - \\
-            $\alpha, \beta, \gamma, ...$ & 几何图形夹角 & rad \\
+            $A, B, C, ...$ &  & - \\
+            $\theta_1, \theta_2, \theta_3$ & 入射角、折射角、反射角的角度 & rad \\
+            $c$ & 光速，取299,792,458m/s & m/s \\
+            $\tilde{v} $ & 波数 & m$^{-1}$\\
+            $\nu$ & 波长 & m\\
             \bottomrule[1.5pt]
         
         \end{tabularx}
@@ -176,7 +179,6 @@
         \bottomrule[1.5pt]
         文件名 & 功能描述 \\
         \midrule[1pt]
-        code1.py & 问题一程序代码 \\
         code2.py & 问题二程序代码 \\
         code3.py & 问题三程序代码 \\
         \bottomrule[1.5pt]
@@ -185,8 +187,6 @@
 \end{table}
 
 \section{代码}
-\subsection{问题1代码}
-\lstinputlisting[language=python]{../code/code1.py}
 
 \subsection{问题2代码}
 \lstinputlisting[language=python]{../code/code2.py}
