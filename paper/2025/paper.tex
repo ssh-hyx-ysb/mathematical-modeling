@@ -11,6 +11,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{float}
+\usepackage{threeparttable} % 表，图注
 \usepackage[numbers]{natbib}
 \usepackage[table]{xcolor}      % 颜色选项
 
@@ -91,18 +92,22 @@
     \centering  % 表居中
     \caption{符号说明详表}  % 表标题
     \label{tab:表标签}  % 表标签
-
-    % 表内容
-    \begin{tabularx}{\textwidth}{p{0.2\textwidth} p{0.6\textwidth} c}
-        \toprule[1.5pt]
-        \textbf{符号} & \textbf{说明} & \textbf{单位} \\ 
-        \midrule[1pt]
-        $A, B, C, ...$ & 几何图形点 & - \\
-        $\alpha, \beta, \gamma, ...$ & 几何图形夹角 & rad \\
-        \bottomrule[1.5pt]
-    \end{tabularx}
-    
-
+    \begin{threeparttable}
+        % 表内容
+        \begin{tabularx}{\textwidth}{p{0.2\textwidth} p{0.6\textwidth} c}
+            \toprule[1.5pt]
+            \textbf{符号} & \textbf{说明} & \textbf{单位} \\ 
+            \midrule[1pt]
+            $A, B, C, ...$ & 几何图形点 & - \\
+            $\alpha, \beta, \gamma, ...$ & 几何图形夹角 & rad \\
+            \bottomrule[1.5pt]
+        
+        \end{tabularx}
+        \begin{tablenotes}
+            \footnotesize
+            \item 注：其他文章内使用但未在表内详细说明的符号将在使用时给出说明。
+        \end{tablenotes}
+    \end{threeparttable}
 \end{table}
 
 
