@@ -1,25 +1,26 @@
+import os
+
 import pandas as pd
 import numpy as np
-import seaborn as sns
 import matplotlib
 import matplotlib.pyplot as plt
 from scipy import stats
+import warnings
+
+warnings.filterwarnings("ignore")
 
 fm = matplotlib.font_manager.fontManager
 fm.addfont("./仿宋_GB2312.TTF")
 fm.addfont("./times.ttf")
-
+print(fm)
 # 设置中文字体和负号正常显示
 plt.rcParams["font.sans-serif"] = ["FangSong_GB2312", "times"]
 plt.rcParams["axes.unicode_minus"] = False
 
-# 设置科学出版风格的绘图
-sns.set_style("whitegrid")
-sns.set_context("paper", font_scale=1.5)
 
 # 读取数据
 print("正在读取数据...")
-df = pd.read_excel("../../data/附件.xlsx")
+df = pd.read_excel("../data/附件.xlsx")
 print(f"数据形状: {df.shape}")
 print("\n前5行数据:")
 print(df.head())
@@ -298,3 +299,77 @@ plt.savefig("quality_control_distribution.png", dpi=300, bbox_inches="tight")
 plt.show()
 
 print("质量控制指标分布图已保存为 'quality_control_distribution.png'")
+
+# First, let's check what files are available in the working directory
+
+
+print("Files in working directory:")
+files = os.listdir(".")
+csv_files = [f for f in files if f.endswith(".csv")]
+print(csv_files)
+
+# Try to load the data with correct filename
+if csv_files:
+    # Use the first CSV file found
+    data_file = csv_files[0]
+    print(f"\nLoading data from: {data_file}")
+
+    # Load the data with proper encoding and check for problematic columns
+    df = pd.read_csv(data_file)
+
+    print(f"Data shape: {df.shape}")
+    print(f"Columns: {list(df.columns)}")
+
+    # Check data types for the numeric columns we want to use
+    numeric_cols_to_check = [
+        "年龄",
+        "身高",
+        "体重",
+        "检测孕周",
+        "孕妇BMI",
+        "原始读段数",
+        "在参考基因组上比对的比例",
+        "重复读段的比例",
+        "唯一比对的读段数  ",
+        "GC含量",
+        "13号染色体的Z值",
+        "18号染色体的Z值",
+        "21号染色体的Z值",
+        "X染色体的Z值",
+        "Y染色体的Z值",
+        "Y染色体浓度",
+        "X染色体浓度",
+        "13号染色体的GC含量",
+        "18号染色体的GC含量",
+        "21号染色体的GC含量",
+        "被过滤掉读段数的比例",
+        "怀孕次数",
+        "生产次数",
+        "孕周",
+    ]
+
+    print("\nData types of numeric columns:")
+    for col in numeric_cols_to_check:
+        if col in df.columns:
+            print(f"{col}: {df[col].dtype}")
+            # Show sample values if object type
+            if df[col].dtype == "object":
+                unique_vals = df[col].dropna().unique()
+                print(
+                    f"  Sample values: {unique_vals[:5] if len(unique_vals) > 5 else unique_vals}"
+                )
+        else:
+            print(f"{col}: Column not found")
+
+    # Check for specific problematic columns
+    print("\nChecking '检测孕周' column:")
+    if "检测孕周" in df.columns:
+        print(f"Unique values in '检测孕周': {df['检测孕周'].dropna().unique()[:10]}")
+
+    print("\nChecking '孕周' column:")
+    if "孕周" in df.columns:
+        print(f"Unique values in '孕周': {df['孕周'].dropna().unique()[:10]}")
+else:
+    print("No CSV files found in the directory")
+
+    # Convert problematic columns to numeric values
