@@ -179,13 +179,42 @@
 \begin{appendices}
 
 \section{运行结果}
+\subsection{点集合}
+\begin{table}[H]
+    \centering  % 表居中
+    \caption{数据1}  % 表标题
+    \label{tab:数据1}  % 表标签
+    \begin{threeparttable}
+        % 表内容
+        \begin{tabularx}{\textwidth}{c |c c | c c | c c}
+            \toprule[1.5pt]
+            $\theta_1$& \textbf{波数(cm$^{-1}$)} & \textbf{反射率(\%)} & \textbf{波数(cm$^{-1}$)}  & \textbf{反射率(\%)} & \textbf{波数(cm$^{-1}$)} & \textbf{反射率(\%)}   \\ 
+            \midrule[1pt]
+            \multirow{5}{*}{$10^\circ$}& 400.1569 &    31.2932 &   517.7933 &    33.8907 &    636.394 &     35.881\\
+            & 832.6155 &     95.385 &   1012.445 &    4.67879 &   1085.727 &    9.43943\\
+            & 1216.38 &    13.3879 &   1401.513 &    15.4973 &   1595.324 &    16.6738\\
+            & 1836.865 &    17.5385 &   2079.851 &    17.9926 &   2322.356 &    18.1737\\
+            & 2586.074 &    18.3814 & \\
+            \midrule[1pt]
+            \multirow{5}{*}{$15^\circ$} & 400.1569 &    36.3367 &   519.7218 &    36.8981 &   639.7689 &    39.0793\\
+            & 927.5925 &    99.9829 &   988.3392 &    8.82083 &   1088.137 &    10.7283\\
+            & 1221.684 &    14.3203 &   1416.459 &    16.4243 &   1607.377 &    17.4551\\
+            & 1866.756 &    18.3449 &   2089.976 &    18.7524 &    2389.37 &    18.6991\\
+            & 2617.411 &    19.1469 & \\
+
+            \bottomrule[1.5pt]
+        
+        \end{tabularx}
+    \end{threeparttable}
+\end{table}
+
 
 
 \section{文件列表}
 \begin{table}[H]
     \caption{程序文件列表}
     \centering
-    \begin{tabularx}{0.85\textwidth}{c l}
+    \begin{tabularx}{\textwidth}{c l}
         \bottomrule[1.5pt]
         文件名 & 功能描述 \\
         \midrule[1pt]
