@@ -73,6 +73,31 @@
 \subsection{问题一分析}
 
 \subsection{问题二分析}
+\begin{algorithm}
+\caption{碳化硅外延层厚度计算算法}
+\begin{algorithmic}[1]
+\REQUIRE 附件文件路径, $n$, $\theta$
+\ENSURE 外延层厚度厚度$d(\mu m)$, 可靠性指标
+\STATE $\sigma$, $R$ $\gets $\text{ReadXLSX}(文件路径)   \% 读取波数和反射率
+\STATE $R$ $\gets$ \text{BaselineCorrect}($R$)  \% 基线校正 (e.g., 扣 min(R), 归一如果 >100\%)
+\STATE $R_{smooth}$ $\gets$ \text{SavgolFilter}($R$, window=21, order=2)  \% 平滑去噪
+\STATE $valley_{indices}$ $\gets$ \text{FindPeaks}($-R_{smooth}$, distance=250, prominence=5)  \% 检测谷位置
+\IF {$length(valley_{indices}) < 2$}
+    \STATE $d$ $\gets$ \text{NaN}  \% 条纹不足, 切换FFT方法
+    \STATE $f$ $\gets$ \text{FFTMainFreq}(R - mean(R))  \% FFT提取主频
+    \STATE $d$ $\gets$ $10^4 / (2 f \sqrt{n^2 - \sin^2 \theta})$
+\ELSE
+    \STATE $valley_{\sigma} \gets \sigma[valley_{indices}]$
+    \STATE $\Delta\sigma \gets \text{Diff}(valley_{\sigma})$  \% 相邻差
+    \STATE $avg_{\Delta\sigma} \gets \text{Mean}(\Delta\sigma) $ \% 平均 (忽略异常)
+    \STATE $cos_{term} \gets \sqrt{n^2 - \sin^2 \theta}$
+    \STATE $d \gets 10^4 / (2 \cdot avg_{\Delta\sigma} \cdot cos_{term})  \% \mu m$
+\ENDIF
+\STATE $rel_{error}$ $\gets$ $|d_1 - d_2| / ((d_1 + d_2)/2)$  \% 多角度一致性
+\STATE $\text{AnalyzeSensitivity}(d, \delta n=0.01, \delta \theta=0.5^\circ$)  \% 敏感性
+\RETURN $d$, $rel_{error}$
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{问题三分析}
 
