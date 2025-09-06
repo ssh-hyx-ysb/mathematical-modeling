@@ -254,10 +254,6 @@ c_huitu.savefig("chromosome_zvalue_distribution.png", dpi=300, bbox_inches="tigh
 
 # print("染色体Z值分布直方图已保存为 'chromosome_zvalue_distribution.png'")
 
-# 4) 绘制GC含量、读段数等质量控制指标的分布图（修正版）
-# print("正在绘制质量控制指标分布图...")
-
-# 修正后的质量控制相关列（注意：'唯一比对的读段数  '后面有空格）
 # 定义质量控制列（注意列名中的空格）
 qc_cols = [
     "GC含量",
