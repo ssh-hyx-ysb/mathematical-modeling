@@ -12,6 +12,9 @@
 \usepackage{tabularx}
 \usepackage{float}
 \usepackage[numbers]{natbib}
+\usepackage{threeparttable} % 表，图注
+\usepackage[table]{xcolor}      % 颜色选项
+
 
 \title{基于统计学习方法的NIPT时点选择与胎儿的异常判定决策模型}
 \tihao{C}
@@ -85,55 +88,154 @@ BMI 值进行分组分别确定 NIPT 的时点。由于每个孕妇的年龄、B
 % 模型假设
 \section{模型假设}
 
+\begin{enumerate}
+    \item 
+    \item 
+    \item 
+\end{enumerate}
 
 
 
 % 符号说明
 \section{符号说明}
 
+% 表结构
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        符号 & 说明 \\
+        \midrule
+        $Y$ & Y 染色体浓度（\%） \\
+        $W$ & 孕周数（周） \\
+        $B$ & 孕妇 BMI（kg/m²） \\
+        $A$ & 孕妇年龄（岁） \\
+        $G$ & GC 含量（\%） \\
+        $R$ & 原始读段数 \\
+        $Z_i$ & 第 $i$ 号染色体 Z 值 \\
+        $\beta_0, \beta_1, \dots$ & 回归模型参数 \\
+        $r$ & 相关系数 \\
+        $p$ & 显著性 p 值 \\
+        $R^2$ & 模型解释方差比例 \\
+        \bottomrule
+    \end{tabular}
+    \caption{符号说明表}
+    \label{tab:symbols}
+\end{table}
 
 % 模型建立与求解
 \section{模型建立与求解}
 
 \subsection{问题一模型的建立与求解}
 \subsubsection{数据预处理}
-判断空数据，异常数据除去
+预处理步骤：
+\begin{enumerate}
+    \item \textbf{缺失值处理}：数值列（如 BMI、读段数）用中位数填充，类别列（如非整倍体）用众数（T18）填充，末次月经（1.11\% 缺失）用众数“2022-12-28”填充。
+    \item \textbf{异常值处理}：使用 Z-score ($|Z| > 3$) 检测极端值（如 Y 浓度异常 8 个），标记但未移除，保留生理合理范围。
+    \item \textbf{孕周转换}：将“检测孕周”转换为数值（保留两位小数），计算孕周 = (检测日期 - 末次月经)/7，过滤孕周 10-40 周。
+    \item \textbf{数据清洗结果}：去重后 1082 条，有效样本 1076 条。
+\end{enumerate}
+
+异常值统计表：
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        指标 & 极端异常值数量 \\
+        \midrule
+        年龄 & 11 \\
+        BMI & 14 \\
+        Y 浓度 & 8 \\
+        GC 含量 & 13 \\
+        ... (总计) & 167 \\
+        \bottomrule
+    \end{tabular}
+    \caption{异常值统计}
+    \label{tab:outliers}
+\end{table}
+
+预处理提升数据质量，保持原始数据完整性。
 
 \subsection{相关性分析}
-首先认为存在相关性，叙述相关性，代入数据算出相关性，根据结果描述相关性强弱。
 
-相关系数 皮尔逊 斯庇尔曼 肯德尔相关系数 效果皮尔逊最好 
+分析 Y 染色体浓度 ($Y$) 与孕周 ($W$)、BMI ($B$)、GC 含量、原始读段数的关系，计算皮尔逊、斯皮尔曼和肯德尔相关系数，显著性以 $p < 0.05$ 为阈值。
 
-低于0.05显著性比较强
+计算结果（有效样本 1076）：
+\begin{itemize}
+    \item $Y$ 与 $W$：皮尔逊 $r=0.077$ ($p=0.0110^*$)，弱正相关。
+    \item $Y$ 与 $B$：皮尔逊 $r=-0.158$ ($p=0.0000^{***}$)，弱负相关。
+    \item $Y$ 与 GC 含量：$r=-0.022$ ($p=0.4666$ ns)，无显著相关。
+    \item $Y$ 与原始读段数：$r=-0.111$ ($p=0.0003^{***}$)，弱负相关。
+\end{itemize}
+
+皮尔逊相关效果最佳，整体弱相关（$|r|<0.2$）但显著，支持线性模型。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/fig-1-1-y_chromosome_correlation_with_sig.png}
+    \caption{Y 染色体浓度相关性分析}
+    \label{fig:corr}
+\end{figure}
+
 \subsection{关系模型}
 
+建立多元线性回归模型：$\log Y = \beta_0 + \beta_1 W + \beta_2 B + \beta_3 (W \times B) + \epsilon$。
+
+模型结果（样本 1076）：
+\begin{itemize}
+    \item $R^2 = 0.053$（调整 $R^2 = 0.050$），解释 5.3\% 方差。
+    \item 参数：$\beta_0 = 3.9507$ ($p=0.000^{***}$)，$\beta_1 = -0.0077$ ($p=0.114$ ns)，$\beta_2 = -0.0628$ ($p=0.001^{**}$)，$\beta_3 = 0.0003$ ($p=0.053$ ns)。
+    \item F 统计 = 17.34 ($p=5.88e-11^{***}$)，模型显著。
+\end{itemize}
+
+GAM 模型 $R^2 = 0.1698$，拟合优于线性模型。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/fig-1-2-y_chromosome_by_bmi_week_with_anova.png}
+    \caption{BMI 分组趋势分析}
+    \label{fig:trend}
+\end{figure}
+
 \subsection{显著性检验}
+
+\begin{enumerate}
+    \item \textbf{p 检验与 t 检验}：BMI 系数显著 ($p=0.001$)，孕周和交互项不显著，整体 F 检验 $p<0.001$。
+    \item \textbf{ANOVA 分组检验}：BMI 分组（超重 15、肥胖 1058），$F=2.501$ ($p=0.114$ ns），超重 vs 肥胖 $t=-2.217$ ($p=0.0427^*$）。
+    \item \textbf{正态性检验}：Z 值非正态（13 号 $p<0.05$ 等），需非参数方法。
+    \item \textbf{质量控制 ANOVA}：GC 含量 $F=6.336$ ($p=0.0120^*$），读段数 $F=4.083$ ($p=0.0436^*$），显著。
+\end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/fig-1-3-chromosome_zvalue_distribution_with_normtest.png}
+    \caption{Z 值分布与正态性检验}
+    \label{fig:zdist}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/fig-1-4-quality_control_with_anova.png}
+    \caption{质量控制指标分析}
+    \label{fig:qc}
+\end{figure}
+
+\subsection{问题一小结}
+
+$Y$ 与 $W$ 弱正相关 ($r=0.077$, $p=0.011$)，与 $B$ 弱负相关 ($r=-0.158$, $p<0.001$)。回归模型 $\log Y = 3.9507 - 0.0077 W - 0.0628 B + 0.0003 (W \times B)$ ($R^2=0.053$)，GAM 提升至 0.1698。BMI 影响显著，建议优化模型。
+
+
+
+
+\subsubsection{相关性分析}
+
+\subsubsection{显著性检验}
 
 p检验t检验
 
 散点图 热力图
 
-
-
-
-
-
-
-由图\ref{fig:q1_1}可知，Y染色体浓度与孕周、BMI均存在一定的相关性，且孕周与BMI之间也存在一定的相关性。
-
-\begin{enumerate}
-    \item 数据点集中在孕周10-20周，Y染色体浓度多在0.05-0.15之间，显示出随孕周增加的趋势，但分布较集中。
-    \item BMI在25-40时浓度分布较广，>40时浓度偏低，提示BMI可能影响浓度达标时间。
-    \item 数据点主要集中在BMI 25-40和孕周10-25之间，分布较密集。
-    \item 相关性较低（接近0），但孕周10-20和BMI 25-35区域数据密集。
-\end{enumerate}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{../figure/q1_1.png}
-    \caption{Y染色体密度与孕周、BMI散点图}
-    \label{fig:q1_1}
-\end{figure}
 
 
 
