@@ -372,5 +372,3 @@ if csv_files:
         print(f"Unique values in '孕周': {df['孕周'].dropna().unique()[:10]}")
 else:
     print("No CSV files found in the directory")
-
-    # Convert problematic columns to numeric values

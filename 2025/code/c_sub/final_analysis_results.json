@@ -1,8 +1,8 @@
 {
   "optimal_times_by_bmi": {
     "超重": 11.0,
-    "肥胖I级": 11.0,
-    "肥胖II级": 11.5,
+    "肥胖II级": 11.0,
+    "肥胖I级": 11.5,
     "肥胖III级": 11.5
   },
   "regression_coefficients": {
