@@ -117,19 +117,6 @@ ffppt[1, 0].scatter(
     s=30,
     color="green",
 )
-<<<<<<< HEAD
-axes[1, 0].set_xlabel("孕妇BMI")
-axes[1, 0].set_ylabel("孕周")
-axes[1, 0].grid(True, alpha=0.3)
-#
-# 相关系数矩阵热图（简化版）
-corr_matrix = scatter_df.corr()
-im = axes[1, 1].imshow(corr_matrix.values, cmap="coolwarm", vmin=-1, vmax=1)
-axes[1, 1].set_xticks(range(len(corr_matrix.columns)))
-axes[1, 1].set_xticklabels(corr_matrix.columns, rotation=45, ha="right")
-axes[1, 1].set_yticks(range(len(corr_matrix.columns)))
-axes[1, 1].set_yticklabels(corr_matrix.columns)
-=======
 ffppt[1, 0].set_xlabel("孕妇BMI")
 ffppt[1, 0].set_ylabel("孕周")
 ffppt[1, 0].grid(True, alpha=0.3)
@@ -141,7 +128,6 @@ ffppt[1, 1].set_xticks(range(len(corr_matrix.columns)))
 ffppt[1, 1].set_xticklabels(corr_matrix.columns, rotation=45, ha="right")
 ffppt[1, 1].set_yticks(range(len(corr_matrix.columns)))
 ffppt[1, 1].set_yticklabels(corr_matrix.columns)
->>>>>>> 8ae502e48dd88a72d39ed437693e21a24ed3d7b4
 
 # 添加相关系数值
 for i in range(len(corr_matrix.columns)):
