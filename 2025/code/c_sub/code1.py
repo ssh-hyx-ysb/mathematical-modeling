@@ -136,7 +136,7 @@ axes[1, 1].set_title("相关系数矩阵")
 
 plt.tight_layout()
 plt.savefig("y_chromosome_correlation_matrix.png", dpi=300, bbox_inches="tight")
-plt.show()
+
 
 print("散点图矩阵已保存为 'y_chromosome_correlation_matrix.png'")
 
@@ -179,7 +179,7 @@ plt.title("不同BMI分组的Y染色体浓度随孕周变化趋势", fontsize=16
 plt.legend(title="BMI分组", fontsize=12)
 plt.grid(True, alpha=0.3)
 plt.savefig("y_chromosome_by_bmi_week.png", dpi=300, bbox_inches="tight")
-plt.show()
+
 
 print("BMI分组曲线图已保存为 'y_chromosome_by_bmi_week.png'")
 
@@ -237,7 +237,7 @@ if len(z_value_cols) < len(axes):
 
 plt.tight_layout()
 plt.savefig("chromosome_zvalue_distribution.png", dpi=300, bbox_inches="tight")
-plt.show()
+
 
 print("染色体Z值分布直方图已保存为 'chromosome_zvalue_distribution.png'")
 
@@ -297,7 +297,7 @@ for i, col in enumerate(qc_cols):
 
 plt.tight_layout()
 plt.savefig("quality_control_distribution.png", dpi=300, bbox_inches="tight")
-plt.show()
+
 
 print("质量控制指标分布图已保存为 'quality_control_distribution.png'")
 
