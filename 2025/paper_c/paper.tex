@@ -159,17 +159,7 @@
 
 \subsection{问题三模型的建立与求解}
 \subsubsection{模型的建立}
-基于 NIPT 检测中 Y 染色体浓度与 BMI、孕周等因素的复杂关系，我们建立了多元回归模型来预测 Y 染色体浓度。模型的核心公式为：
 
-$$Y_{conc} = \beta_0 + \beta_1 \cdot BMI + \beta_2 \cdot GA + \beta_3 \cdot BMI^2 + \beta_4 \cdot GA^2 + \beta_5 \cdot (BMI \times GA) + \varepsilon$$
-
-其中$Y_{conc}$表示 Y 染色体浓度，$BMI$为孕妇身体质量指数，$GA$为孕周，$\beta_i$为回归系数，$\varepsilon$为误差项。该模型考虑了 BMI 和孕周的二次项以及交互效应，能够更好地捕捉非线性关系。
-
-\textbf{FIG}
-
-为了评估不同 BMI 分组下的检测准确性，我们建立了逻辑回归模型来预测检测成功率：
-
-$$P(success) = \frac{1}{1 + e^{-(\alpha_0 + \alpha_1 \cdot BMI + \alpha_2 \cdot GA + \alpha_3 \cdot Age)}}$$
 
 \subsection{问题四模型的建立与求解}
 \subsubsection{建模思路总览}
