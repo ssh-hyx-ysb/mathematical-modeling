@@ -1,0 +1,13 @@
+逻辑回归模型敏感性分析报告
+==================================================
+
+模型准确率: 0.9750
+模型精确率: 1.0000
+模型召回率: 0.9375
+模型F1分数: 0.9677
+
+生成的分析图表:
+- coefficient_sensitivity_tornado.png (特征系数敏感性龙卷风图)
+- threshold_sensitivity_curves.png (阈值敏感性曲线)
+- error_robustness_curve.png (误差稳健性曲线)
+- decision_boundary_contour.png (决策边界等高线图)
