@@ -47,7 +47,7 @@ plt.xlabel("Y染色体浓度")
 plt.ylabel("频数")
 plt.title("Y染色体浓度分布")
 plt.grid(True, alpha=0.3)
-plt.savefig("y_chromosome_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig1-y_chromosome_distribution.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 # 基于Y染色体浓度阈值来识别男胎（通常Y染色体浓度>0表示男胎）
@@ -92,7 +92,7 @@ plt.title("轮廓系数 - BMI聚类")
 plt.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig("bmi_clustering_elbow.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig2-bmi_clustering_elbow.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 # 选择最佳K值（肘部位置）
@@ -180,7 +180,7 @@ plt.ylabel("孕妇BMI")
 plt.xticks(rotation=45)
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig("bmi_category_distribution.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig3-bmi_category_distribution.png", dpi=300, bbox_inches="tight")
 # plt.show()
 df["孕周"] = df["检测孕周"].apply(
     lambda v: float(v.split("+")[0][::-1][1:][::-1])
@@ -239,7 +239,7 @@ plt.legend()
 plt.grid(True, alpha=0.3)
 plt.xticks(rotation=45)
 plt.tight_layout()
-plt.savefig("gestational_age_by_bmi_category.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig4-gestational_age_by_bmi_category.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 # 进一步分析：各BMI组在不同孕周的达标比例
@@ -278,7 +278,9 @@ plt.legend()
 plt.grid(True, alpha=0.3)
 plt.xticks(gestational_bins)
 plt.tight_layout()
-plt.savefig("qualified_ratio_by_gestational_age_bmi.png", dpi=300, bbox_inches="tight")
+plt.savefig(
+    "fig5-qualified_ratio_by_gestational_age_bmi.png", dpi=300, bbox_inches="tight"
+)
 # plt.show()
 
 df.to_csv("test.csv", index=False)
