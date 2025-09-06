@@ -208,6 +208,7 @@ ffppt[1, 1].set_xticks(range(len(corr_matrix.columns)))
 ffppt[1, 1].set_xticklabels(corr_matrix.columns, rotation=45, ha="right")
 ffppt[1, 1].set_yticks(range(len(corr_matrix.columns)))
 ffppt[1, 1].set_yticklabels(corr_matrix.columns)
+>>>>>>> 8ae502e48dd88a72d39ed437693e21a24ed3d7b4
 
 # 标注相关系数和显著性（核心修复部分）
 for i in range(len(corr_matrix.columns)):
