@@ -21,7 +21,7 @@ plt.rcParams["axes.unicode_minus"] = False
 
 # 读取数据
 print("正在读取数据...")
-df = pd.read_excel("../data/附件.xlsx")
+df = pd.read_excel("./附件.xlsx")
 print(f"数据形状: {df.shape}")
 print("\n前5行数据:")
 print(df.head())
