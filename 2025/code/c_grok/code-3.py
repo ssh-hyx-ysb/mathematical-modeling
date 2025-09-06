@@ -35,8 +35,25 @@ def clean_week(week_str):
     return week_str
 
 
+def get_three_array(val):
+    init_arr = [0, 0, 0]
+    if val is np.nan:
+        return val
+    if "T13" in val:
+        init_arr[0] = 1
+    elif "T18" in val:
+        init_arr[1] = 1
+    elif "T21" in val:
+        init_arr[2] = 1
+    return init_arr
+
+
 male_data["孕周"] = male_data["检测孕周"].apply(clean_week)
+male_data["孕周**2"] = male_data["孕周"].apply(lambda x: x**2)
+male_data["染色体的非整倍体"] = male_data["染色体的非整倍体"].apply(get_three_array)
 female_data["孕周"] = female_data["检测孕周"].apply(clean_week)
+female_data["孕周**2"] = female_data["孕周"].apply(lambda x: x**2)
+female_data["染色体的非整倍体"] = female_data["染色体的非整倍体"].apply(get_three_array)
 
 # 问题1: 分析Y染色体浓度与孕周数和BMI的相关性
 male_data_q1 = male_data.dropna(subset=["Y染色体浓度", "孕周", "孕妇BMI"])
@@ -172,6 +189,7 @@ plt.close()
 
 print(f"优化分组与时点: {optimal_weeks_q3.to_dict()}")
 print(f"误差MSE: {mse:.4f}")
+
 
 # 问题4: 女胎异常判定
 female_data_q4 = female_data.dropna(

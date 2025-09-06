@@ -1,0 +1,12 @@
+{
+  "max_concentration": 0.234217554,
+  "mean_bmi": 32.28879078882743,
+  "correlation_bmi_concentration": -0.1512998139245649,
+  "recommended_weeks_by_bmi": {
+    "BMI<25": "16-18周",
+    "BMI25-30": "18-20周",
+    "BMI30-35": "20-22周",
+    "BMI35-40": "22-24周",
+    "BMI>40": "24周后"
+  }
+}

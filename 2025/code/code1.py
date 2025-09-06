@@ -2,19 +2,20 @@ import os
 
 import pandas as pd
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
 from scipy import stats
 import warnings
 
 warnings.filterwarnings("ignore")
 
+import matplotlib
+
 fm = matplotlib.font_manager.fontManager
 fm.addfont("./仿宋_GB2312.TTF")
 fm.addfont("./times.ttf")
 print(fm)
 # 设置中文字体和负号正常显示
-plt.rcParams["font.sans-serif"] = ["FangSong_GB2312", "times"]
+plt.rcParams["font.sans-serif"] = ["FangSong_GB2312"]
 plt.rcParams["axes.unicode_minus"] = False
 
 
