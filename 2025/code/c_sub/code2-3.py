@@ -281,6 +281,8 @@ plt.tight_layout()
 plt.savefig("qualified_ratio_by_gestational_age_bmi.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
+df.to_csv("test.csv", index=False)
+
 # 3. 建立多元回归模型：达标时间 = f(BMI, 身高, 体重, 年龄) + ε
 
 
