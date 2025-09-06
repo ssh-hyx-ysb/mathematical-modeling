@@ -359,7 +359,7 @@ plt.xlabel("特征重要性 (系数绝对值)")
 plt.title("影响Y染色体浓度的特征重要性")
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.savefig("feature_importance_y_chromosome.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig6-feature_importance_y_chromosome.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 # 保存模型结果
@@ -442,7 +442,7 @@ plt.axhline(y=0.95, color="red", linestyle="--", alpha=0.7, label="95%阈值")
 plt.legend()
 
 plt.tight_layout()
-plt.savefig("pca_variance_explained.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig7-pca_variance_explained.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 print("主成分分析结果:")
@@ -516,7 +516,7 @@ plt.title("测量误差导致的系数变化(相对百分比)")
 plt.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig("sensitivity_analysis_error_impact.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig8-sensitivity_analysis_error_impact.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 # 6. 基于模型结果进行BMI分组优化建议
@@ -652,7 +652,7 @@ plt.title("10%测量误差对系数的影响")
 plt.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig("comprehensive_analysis_summary.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig9-comprehensive_analysis_summary.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 # 2. 主成分分析可视化
@@ -688,7 +688,7 @@ plt.legend(["累计解释方差", "单个主成分解释方差"])
 plt.grid(True, alpha=0.3)
 
 plt.tight_layout()
-plt.savefig("pca_analysis_visualization.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig10-pca_analysis_visualization.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 # 3. 最优检测时间推荐
@@ -717,7 +717,7 @@ for i, (category, week) in enumerate(optimal_times_by_bmi.items()):
 
 plt.grid(True, alpha=0.3, axis="y")
 plt.ylim(10, 13)
-plt.savefig("optimal_detection_times.png", dpi=300, bbox_inches="tight")
+plt.savefig("fig11-optimal_detection_times.png", dpi=300, bbox_inches="tight")
 # plt.show()
 
 print("=" * 60)
