@@ -177,12 +177,6 @@ ffppt[0, 1].text(
     transform=ffppt[0, 1].transAxes,
     bbox=dict(boxstyle="round", facecolor="white", alpha=0.8),
 )
-<<<<<<< HEAD
-ffppt[1, 0].set_xlabel("孕妇BMI")
-ffppt[1, 0].set_ylabel("孕周")
-ffppt[1, 0].grid(True, alpha=0.3)
-=======
->>>>>>> d144980b28e5a9b567ca675aa931d8107bf2a1ec
 
 # 子图3: Y染色体浓度 vs GC含量（标注相关系数和P值）
 ffppt[1, 0].scatter(
