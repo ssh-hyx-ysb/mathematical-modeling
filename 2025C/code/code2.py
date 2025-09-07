@@ -40,9 +40,9 @@ def parse_gestational_week(gw_str):
 
 df["孕周"] = df["检测孕周"].apply(parse_gestational_week)
 df = df.dropna(subset=["孕周", "Y染色体浓度", "孕妇BMI"])
-df = df[(df["孕周"] >= 8) & (df["孕周"] <= 28)]  # 合理孕周范围
+df = df[(df["孕周"] >= 8) & (df["孕周"] <= 28)]
 print(f"清洗后有效样本数：{len(df)}")
-THRESHOLD = 0.04  # 4%
+THRESHOLD = 0.04
 df["Y达标"] = df["Y染色体浓度"] >= THRESHOLD
 first达标 = (
     df[df["Y达标"]]
@@ -86,7 +86,6 @@ huatude.xlabel("BMI分组")
 huatude.xticks(rotation=0)
 huatude.tight_layout()
 huatude.savefig(output_dir / "first_attainment_by_bmi.png", dpi=300)
-huatude.show()
 huatude.figure(figsize=(12, 7))
 for label in bmi_labels:
     data = df[df["BMI组"] == label]
@@ -108,7 +107,6 @@ huatude.legend()
 huatude.grid(True, alpha=0.3)
 huatude.tight_layout()
 huatude.savefig(output_dir / "attainment_ratio_by_bmi.png", dpi=300)
-huatude.show()
 best_timing = group_stats[["80分位达标孕周"]].copy()
 print("80分位达标孕周（含NaN）：")
 print(group_stats["80分位达标孕周"])
@@ -129,8 +127,6 @@ df_noisy["Y达标_噪声"] = df_noisy["Y染色体浓度_噪声"] >= THRESHOLD
 
 first达标_噪声 = df_noisy[df_noisy["Y达标_噪声"]].groupby("孕妇代码")["孕周"].min()
 df = df.merge(first达标_噪声, on="孕妇代码", how="left", suffixes=("", "_噪声"))
-
-# 重新计算各组80%分位
 noise_impact = df.groupby("BMI组")["首次达标孕周"].quantile(0.8).round(2)
 print("\n加入±5%浓度测量误差后，各组80%分位达标时间变化：")
 print(noise_impact)
