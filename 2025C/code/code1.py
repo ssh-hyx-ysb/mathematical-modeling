@@ -86,7 +86,7 @@ def parse_gestational_week(gw_str):
             day = float(parts[1]) if len(parts) > 1 else 0
             return week + day / 7
         else:
-            return float(gw_str)
+            return float(ga_str)
     except:
         return suanshu_pack.nan
 
@@ -159,8 +159,8 @@ fig, axes = huatude.subplots(2, 2, figsize=(12, 10))
 axes[0, 0].scatter(model2.fittedvalues, model2.resid, alpha=0.6)
 axes[0, 0].hlines(
     0,
-    model2.fittedvalues.min(),
-    model2.fittedvalues.max(),
+    poly_model.fittedvalues.min(),
+    poly_model.fittedvalues.max(),
     colors="r",
     linestyles="dashed",
 )
@@ -186,7 +186,7 @@ axes[1, 0].plot(
 )
 axes[1, 0].set_xlabel("孕周")
 axes[1, 0].set_ylabel("Y染色体浓度 (%)")
-axes[1, 0].set_title("Y浓度 vs 孕周（拟合效果）")
+axes[1, 0].set_title("Y染色体浓度与孕周关系（拟合效果）")
 axes[1, 0].legend()
 axes[1, 1].scatter(
     moxingde_shuju["BMI"], moxingde_shuju["Y染色体浓度"], alpha=0.6, color="green"
