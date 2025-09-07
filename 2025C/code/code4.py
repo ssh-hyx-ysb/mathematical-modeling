@@ -9,7 +9,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
-<<<<<<< HEAD
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.metrics import classification_report, roc_auc_score, roc_curve
@@ -26,24 +25,6 @@ warnings.filterwarnings("ignore")
 
 # 清理 AB 列：非空即为异常
 female_data = pd.read_excel("附件.xlsx", sheet_name="女胎检测数据")
-=======
-from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MultiLabelBinarizer
-sns.set_style(
-    "whitegrid", {"axes.facecolor": "#F0F0F0", "axes.grid": True, "axes.linewidth": 0.5}
-)
-fm = matplotlib.font_manager.fontManager
-fm.addfont("2025C/code/仿宋_GB2312.TTF")
-fm.addfont("2025C/code/times.ttf")
-print(fm)
-plt.rcParams["font.sans-serif"] = ["FangSong_GB2312", "times"]
-plt.rcParams["axes.unicode_minus"] = False
-
-
-# 读取女胎数据
-female_data = pd.read_excel("2025C/code/附件.xlsx", sheet_name="女胎检测数据")
->>>>>>> 8a2bef7c7c59613fa1e15630f33e0220e50511d2
 
 
 # 提取异常标签：AB列包含T21/T18/T13即为异常
