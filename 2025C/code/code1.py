@@ -86,7 +86,7 @@ def parse_gestational_week(gw_str):
             day = float(parts[1]) if len(parts) > 1 else 0
             return week + day / 7
         else:
-            return float(ga_str)
+            return float(gw_str)
     except:
         return suanshu_pack.nan
 
@@ -159,8 +159,8 @@ fig, axes = huatude.subplots(2, 2, figsize=(12, 10))
 axes[0, 0].scatter(model2.fittedvalues, model2.resid, alpha=0.6)
 axes[0, 0].hlines(
     0,
-    poly_model.fittedvalues.min(),
-    poly_model.fittedvalues.max(),
+    model2.fittedvalues.min(),
+    model2.fittedvalues.max(),
     colors="r",
     linestyles="dashed",
 )
