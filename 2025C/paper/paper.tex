@@ -15,7 +15,7 @@
 \usepackage[numbers]{natbib}
 \usepackage[table]{xcolor}      % 颜色选项
 
-\title{基于聚类分析的NIPT时点选择与胎儿的异常判定决策模型}
+\title{基于逻辑回归的NIPT时点选择与胎儿的异常判定决策模型}
 \tihao{C}
 \baominghao{1234}
 \schoolname{中原工学院}
@@ -46,7 +46,7 @@
 
     \textbf{针对问题四，}基于604例女胎样本，以AB列（13/18/21 号染色体非整倍体报警）为异常标签，构建 “测序质量 + 核心诊断 + 个体差异”\textbf{18 维特征体系}，对比随机森林与逻辑回归模型。\textbf{逻辑回归表现更优}（F1=0.285，AUC=0.699）。特征重要性分析表明，13 号染色体 GC 含量（重要性0.1185）、孕妇 BMI（重要性0.1146）等技术与生理因素主导异常判定，Z 值作用有限（重要性 < 0.08），据此提出 “技术校正优先$\to$Z 值校正 $\to$ 模型概率辅助” 的女胎异常判定流程，有效降低假阳性干扰。
 
-    \keywords{NIPT\quad 检测时点优化\quad 逻辑回归\quad 染色体异常判定\quad 线性混合效应模型\quad 测序质量校正}
+    \keywords{NIPT\quad 相关性分析\quad 线性回归\quad 逻辑回归\quad 染色体异常判定}
 \end{abstract}
 
 
