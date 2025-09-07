@@ -181,12 +181,12 @@ NIPT（无创产前检测）的准确性对男胎而言取决于 Y 染色体浓�
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.49\textwidth}
-        \includegraphics[width=0.8\textwidth]{../figure/q1_week_Yconc.png}
+        \includegraphics[width=0.8\textwidth]{../figure/C1_Output/q1_week_Yconc.png}
         \caption{孕周分布}
         \label{fig:孕周分布}
     \end{minipage}
     \begin{minipage}{0.49\textwidth}
-        \includegraphics[width=0.8\textwidth]{../figure/q1_week_BMI.png}
+        \includegraphics[width=0.8\textwidth]{../figure/C1_Output/q1_week_BMI.png}
         \caption{BMI分布}
         \label{fig:BMI分布}
     \end{minipage}
@@ -196,7 +196,7 @@ NIPT（无创产前检测）的准确性对男胎而言取决于 Y 染色体浓�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{../figure/q1_scatter_y_vs_gw_by_bmi.png}
+    \includegraphics[width=0.8\textwidth]{../figure/C1_Output/q1_scatter_y_vs_gw_by_bmi.png}
     \caption{按 BMI 着色的 Y浓度 vs 孕周图}
     \label{fig:YandWbyBMI}
 \end{figure}
@@ -210,13 +210,13 @@ NIPT（无创产前检测）的准确性对男胎而言取决于 Y 染色体浓�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{../figure/q1_correlation_heatmap.png}
+    \includegraphics[width=0.6\textwidth]{../figure/C1_Output/q1_correlation_heatmap.png}
     \caption{相关性分析热力图}
     \label{fig:heatmap}
 \end{figure}
 
-\subsubsection{关系模型}
-通过相关性分析，我们可以建立以下模型。
+\subsubsection{建立关系模型}
+通过相关性分析，我们可以建立以下模型，以进一步探索 Y 染色体浓度与孕周、BMI 之间的数量关系，并为后续的模型优化奠定基础。
 
 \textbf{（一）多元线性回归模型}
 
@@ -367,10 +367,9 @@ F 检验显示模型整体显著（$p=8.46 \times 10^{-8}$），表明该多项�
 
 这些结果表明 BMI 是唯一显著影响 Y 染色体浓度的变量，添加的二次项和交互项未能显著提升模型表现。模型 $R^2 = 0.041$ 比线性模型略高，但整体拟合提升有限。综上，该模型在 BMI 效应上优于线性模型，但非线性改进不明显。
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{问题二模型的建立与求解}
-
 
 \subsubsection{模型构建} 
 参考临床BMI分类（正常<28，超重28-32，肥胖>32），结合数据中高BMI样本占比高的特点，兼顾医学合理性与数据分布特征，将孕妇BMI值细化至5个区间，每组样本量需满足统计有效性（最小组样本数$\ge$3，本模型中各组样本数为3-143，均符合要求），函数表示如下
@@ -528,7 +527,7 @@ F 检验显示模型整体显著（$p=8.46 \times 10^{-8}$），表明该多项�
     \text{logit}(P) = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_3 + \beta_4X_4 + \beta_5X_5 + \beta_6X_6
 \end{equation}
 其中：$\beta_0$为截距项，反映所有自变量为0时的logit(P)基准值,$\beta_i$（$i=1,...,6$）为回归系数，正系数表示该变量增大时，达标概率上升（$\text{logit}(P)$增大），负系数则相反。  
-在变量选择依据上，核心变量有孕周（$X_1$）、BMI（$X_2$），题目明确要求分析的关键因素，问题2已验证二者对达标时间的显著影响；协变量有年龄（$X_3$）、身高（$X_4$）、体重（$X_5$）以及GC含量（$X_6$）。  
+在变量选择依据上，核心变量有孕周（$X_1$）、BMI（$X_2$），题目明确要求分析的关键因素，问题二已验证二者对达标时间的显著影响；协变量有年龄（$X_3$）、身高（$X_4$）、体重（$X_5$）以及GC含量（$X_6$）。  
 
 为评估模型的性能，选取以下指标作为评价标准：
 \begin{enumerate}
@@ -540,7 +539,7 @@ F 检验显示模型整体显著（$p=8.46 \times 10^{-8}$），表明该多项�
   
 
 \subsubsection{模型求解}  
-读取问题1清洗后的数据表，包含926例样本，对每条数据达标状态标记：$Y=1$（Y染色体浓度≥0.04），$Y=0$（否则）BMI分组：按[20,28),[28,32),[32,36),[36,40),≥40划分为5组，标签为$g=1$到$g=5$。采用statsmodels库拟合逻辑回归模型，输出核心结果如表\ref{tab:模型拟合输出核心结果}所示。
+读取问题一清洗后的数据表，包含926例样本，对每条数据达标状态标记：$Y=1$（Y染色体浓度≥0.04），$Y=0$（否则）BMI分组：按[20,28),[28,32),[32,36),[36,40),≥40划分为5组，标签为$g=1$到$g=5$。采用statsmodels库拟合逻辑回归模型，输出核心结果如表\ref{tab:模型拟合输出核心结果}所示。
 
 \begin{table}[H]
     \centering  % 表居中
@@ -600,7 +599,7 @@ F 检验显示模型整体显著（$p=8.46 \times 10^{-8}$），表明该多项�
 \end{enumerate} 
 
 
-在模型结果分析中，各因素对Y染色体浓度达标概率的影响机制呈现出鲜明特征与内在关联，BMI虽呈正向显著影响（$\beta_2=0.9542$），即BMI越高$\text{logit}(P)$越大，看似与“高BMI孕妇Y浓度更低、达标更难”的临床常识矛盾，但实则因模型中BMI与体重存在负向交互作用（体重$\beta_5=-0.4013$），高BMI若由“身高矮”而非“体重大”导致，反而可能间接提升达标概率，需结合BMI构成综合解读；体重呈负向显著影响（$\beta_5=-0.4013$），体重越高$\text{logit}(P)$越小、达标概率越低，这与“体重越大，胎儿游离DNA在母体血液中稀释越严重、浓度越低”的生理机制完全契合；身高呈边缘显著正向影响（$\beta_4=0.3813$），身高越高达标概率越高，推测因身高高的孕妇体脂分布更均匀，胎盘功能更稳定，更利于胎儿DNA释放；孕周虽呈正向趋势（孕周越大达标概率越高），但未达显著水平（$\beta_1=0.0344$），核心原因是模型纳入的BMI、体重等因素对达标概率的影响更强，掩盖了孕周的独立作用。从最佳时点合理性来看，与问题2基于80\%分位值的结果相比，问题3基于90\%达标概率的时点整体略有推迟，如[28,32)组因多因素模型捕捉到该组体重较低的优势，时点从16周提前至13周，高BMI组[36,40)则因模型纳入体重后发现该组体重均值较低、达标速度快于单纯BMI分组预期，时点从17周提前至15周；从临床适配性而言，[28,32)、[32,36)、[36,40)组时点均处于13-15周的“中期早期”，完美契合“尽早检测且保证准确性”的核心目标，而[20,28)组21.5周的时点虽偏晚，但因该组样本量仅5例、代表性不足，临床中可参考[28,32)组时点，并结合孕妇个体身高、体重进一步调整，确保时点推荐的实用性与精准性 。
+在模型结果分析中，各因素对Y染色体浓度达标概率的影响机制呈现出鲜明特征与内在关联，BMI虽呈正向显著影响（$\beta_2=0.9542$），即BMI越高$\text{logit}(P)$越大，看似与“高BMI孕妇Y浓度更低、达标更难”的临床常识矛盾，但实则因模型中BMI与体重存在负向交互作用（体重$\beta_5=-0.4013$），高BMI若由“身高矮”而非“体重大”导致，反而可能间接提升达标概率，需结合BMI构成综合解读；体重呈负向显著影响（$\beta_5=-0.4013$），体重越高$\text{logit}(P)$越小、达标概率越低，这与“体重越大，胎儿游离DNA在母体血液中稀释越严重、浓度越低”的生理机制完全契合；身高呈边缘显著正向影响（$\beta_4=0.3813$），身高越高达标概率越高，推测因身高高的孕妇体脂分布更均匀，胎盘功能更稳定，更利于胎儿DNA释放；孕周虽呈正向趋势（孕周越大达标概率越高），但未达显著水平（$\beta_1=0.0344$），核心原因是模型纳入的BMI、体重等因素对达标概率的影响更强，掩盖了孕周的独立作用。从最佳时点合理性来看，与问题二基于80\%分位值的结果相比，问题三基于90\%达标概率的时点整体略有推迟，如[28,32)组因多因素模型捕捉到该组体重较低的优势，时点从16周提前至13周，高BMI组[36,40)则因模型纳入体重后发现该组体重均值较低、达标速度快于单纯BMI分组预期，时点从17周提前至15周；从临床适配性而言，[28,32)、[32,36)、[36,40)组时点均处于13-15周的“中期早期”，完美契合“尽早检测且保证准确性”的核心目标，而[20,28)组21.5周的时点虽偏晚，但因该组样本量仅5例、代表性不足，临床中可参考[28,32)组时点，并结合孕妇个体身高、体重进一步调整，确保时点推荐的实用性与精准性 。
 
 
 
@@ -942,13 +941,13 @@ x'_i = \frac{x_{i} \mu_i}{\sigma_i}
 
 
     \section{代码}
-    \subsection{问题1代码}
+    \subsection{问题一代码}
         \lstinputlisting[language=python]{../code/code1.py}    
-    \subsection{问题2代码}
+    \subsection{问题二代码}
         \lstinputlisting[language=python]{../code/code2.py}
-    \subsection{问题3代码}
+    \subsection{问题三代码}
         \lstinputlisting[language=python]{../code/code3.py}
-    \subsection{问题4代码}
+    \subsection{问题四代码}
         \lstinputlisting[language=python]{../code/code4.py}
 
 \end{appendices}
