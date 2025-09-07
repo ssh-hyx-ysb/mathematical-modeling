@@ -11,6 +11,7 @@ wheels/
 
 # ignore latex middle files
 *.aux
+*.bbl
 *.blg
 *.fdb_latexmk
 *.fls
