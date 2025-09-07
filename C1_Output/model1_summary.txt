@@ -4,7 +4,7 @@ Dep. Variable:                 Y染色体浓度   R-squared:                    
 Model:                            OLS   Adj. R-squared:                  0.035
 Method:                 Least Squares   F-statistic:                     17.59
 Date:                Sun, 07 Sep 2025   Prob (F-statistic):           3.17e-08
-Time:                        10:01:42   Log-Likelihood:                 1849.7
+Time:                        08:18:38   Log-Likelihood:                 1849.7
 No. Observations:                 926   AIC:                            -3693.
 Df Residuals:                     923   BIC:                            -3679.
 Df Model:                           2                                         

@@ -1,162 +1,129 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MultiLabelBinarizer
-
-# 设置Nature风格可视化
-sns.set_style(
-    "whitegrid", {"axes.facecolor": "#F0F0F0", "axes.grid": True, "axes.linewidth": 0.5}
-)
+import pandas as shuju_gongju
 import matplotlib
+import matplotlib.pyplot as huatude
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.metrics import classification_report, roc_auc_score, roc_curve
+from sklearn.preprocessing import StandardScaler
+from pathlib import Path
+import warnings
 
+warnings.filterwarnings("ignore")
+female_data = shuju_gongju.read_excel("附件.xlsx", sheet_name="女胎检测数据")
+output_dir = Path("C4_Output")
+output_dir.mkdir(exist_ok=True)
 fm = matplotlib.font_manager.fontManager
 fm.addfont("./仿宋_GB2312.TTF")
 fm.addfont("./times.ttf")
-print(fm)
-# 设置中文字体和负号正常显示
-plt.rcParams["font.sans-serif"] = ["FangSong_GB2312", "times"]
-plt.rcParams["axes.unicode_minus"] = False
+huatude.rcParams["font.sans-serif"] = ["FangSong_GB2312", "times"]
+huatude.rcParams["axes.unicode_minus"] = False
 
 
-# 加载女胎数据（替换为实际路径）
-female_data = pd.read_excel("附件.xlsx", sheet_name="女胎检测数据")
+def is_abnormal(ab):
+    if shuju_gongju.isna(ab) or ab.strip() == "":
+        return 0
+    ab = str(ab).upper()
+    if "T13" in ab or "T18" in ab or "T21" in ab:
+        return 1
+    return 0
 
 
-# 解析'染色体的非整倍体'为三元组标签 [13,18,21]
-def parse_abnormalities(label):
-    if pd.isna(label) or label == "":
-        return [0, 0, 0]  # 正常
-    labels = [0, 0, 0]
-    if "T13" in label or "13" in label:  # 兼容'T13'或数字
-        labels[0] = 1
-    if "T18" in label or "18" in label:
-        labels[1] = 1
-    if "T21" in label or "21" in label:
-        labels[2] = 1
-    return labels
+def weighted_rule(row):
+    if (
+        abs(row["21号染色体的Z值_加权"]) > 2.8
+        or abs(row["18号染色体的Z值_加权"]) > 2.8
+        or abs(row["13号染色体的Z值_加权"]) > 2.8
+    ):
+        return 1
+    return 0
 
 
-female_data["abnormalities"] = female_data["染色体的非整倍体"].apply(
-    parse_abnormalities
-)
+def simple_z_rule(row):
+    z21 = row["21号染色体的Z值"]
+    z18 = row["18号染色体的Z值"]
+    z13 = row["13号染色体的Z值"]
+    if abs(z21) > 3 or abs(z18) > 3 or abs(z13) > 3:
+        return 1
+    return 0
 
-# 数据清洗
-female_data_q4 = female_data.dropna(
-    subset=[
-        "13号染色体的Z值",
-        "18号染色体的Z值",
-        "21号染色体的Z值",
-        "X染色体的Z值",
-        "13号染色体的GC含量",
-        "18号染色体的GC含量",
-        "21号染色体的GC含量",
-        "孕妇BMI",
-        "唯一比对的读段数",
-        "被过滤掉读段数的比例",
-        "染色体的非整倍体",
-    ]
-)
 
-# 特征列表
-features = [
-    "13号染色体的Z值",
-    "18号染色体的Z值",
-    "21号染色体的Z值",
-    "X染色体的Z值",
+def quality_weight(row):
+    reads = row["原始读段数"]
+    gc = row["GC含量"]
+    filter_rate = row["被过滤掉读段数的比例"]
+    score = 1.0
+    if reads < 4e6:
+        score *= 0.8
+    if gc < 0.38 or gc > 0.42:
+        score *= 0.7
+    if filter_rate > 0.03:
+        score *= 0.9
+    return score
+
+
+female_data["label_abnormal"] = female_data["染色体的非整倍体"].apply(is_abnormal)
+print(f"女胎数据总量: {len(female_data)}")
+print(f"报告异常数量: {female_data['label_abnormal'].sum()}")
+z_features = ["13号染色体的Z值", "18号染色体的Z值", "21号染色体的Z值", "X染色体的Z值"]
+qc_features = [
+    "GC含量",
+    "原始读段数",
+    "唯一比对的读段数",
+    "在参考基因组上比对的比例",
+    "被过滤掉读段数的比例",
     "13号染色体的GC含量",
     "18号染色体的GC含量",
     "21号染色体的GC含量",
-    "孕妇BMI",
-    "唯一比对的读段数",
-    "被过滤掉读段数的比例",
 ]
-
-X = female_data_q4[features]
-y = np.array(female_data_q4["abnormalities"].tolist())  # 形状: (n_samples, 3)
-
-# 检查类分布
-class_dist = [np.bincount(y[:, i]) for i in range(3)]
-print(f"13号类分布: {class_dist[0]}")
-print(f"18号类分布: {class_dist[1]}")
-print(f"21号类分布: {class_dist[2]}")
-
-# 训练三个独立随机森林分类器
-models = []
-accuracies = []
-aucs = []
-conf_matrices = []
-feature_importances_list = []
-
-for i in range(3):  # 13,18,21
-    X_train, X_test, y_train, y_test = train_test_split(
-        X,
-        y[:, i],
-        test_size=0.2,
-        random_state=42,
-        stratify=y[:, i] if len(np.unique(y[:, i])) > 1 else None,
-    )
-
-    rf = RandomForestClassifier(
-        n_estimators=100,
-        random_state=42,
-        class_weight="balanced" if len(np.unique(y_train)) > 1 else None,
-    )
-    rf.fit(X_train, y_train)
-    models.append(rf)
-
-    y_pred = rf.predict(X_test)
-    y_prob = (
-        rf.predict_proba(X_test)[:, 1]
-        if len(np.unique(y_train)) > 1
-        else np.full(len(y_test), 0.5)
-    )  # 单类处理
-
-    accuracies.append(accuracy_score(y_test, y_pred))
-    aucs.append(roc_auc_score(y_test, y_prob) if len(np.unique(y_test)) > 1 else np.nan)
-    conf_matrices.append(confusion_matrix(y_test, y_pred))
-    feature_importances_list.append(rf.feature_importances_)
-
-# 平均特征重要性
-avg_importance = np.mean(feature_importances_list, axis=0)
-
-# 可视化特征重要性
-plt.figure(figsize=(12, 6))
-sns.barplot(x=avg_importance, y=features, palette="viridis")
-plt.title("平均特征重要性 (13/18/21号染色体)")
-plt.xlabel("重要性")
-plt.ylabel("特征")
-plt.savefig("feature_importance.png")
-plt.close()
-
-# 可视化混淆矩阵 (示例13号)
-for i, cm in enumerate(conf_matrices):
-    plt.figure(figsize=(6, 4))
-    sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", cbar=False)
-    plt.title(f'混淆矩阵 - {["13号", "18号", "21号"][i]}染色体')
-    plt.xlabel("预测标签")
-    plt.ylabel("真实标签")
-    plt.savefig(f'confusion_matrix_{["13", "18", "21"][i]}.png')
-    plt.close()
-
-# 输出结果
-print(f"准确率 (13/18/21): {accuracies}")
-print(f"AUC (13/18/21): {aucs}")
-
-
-# 判定方法示例：输入新样本，返回异常概率
-def predict_abnormal(new_sample):
-    probs = [rf.predict_proba(pd.DataFrame([new_sample]))[:, 1][0] for rf in models]
-    return {
-        "13号异常概率": probs[0],
-        "18号异常概率": probs[1],
-        "21号异常概率": probs[2],
-    }
-
-
-# 测试示例
-new_sample = {f: np.random.rand() for f in features}
-print(predict_abnormal(new_sample))
+demo_features = ["孕妇BMI", "年龄"]
+all_features = z_features + qc_features + demo_features
+female_data = female_data.dropna(subset=all_features + ["label_abnormal"])
+X = female_data[all_features]
+y = female_data["label_abnormal"]
+print(f"有效样本量: {len(X)}，其中异常: {y.sum()}")
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+feature_names = X.columns.tolist()
+rf = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
+lr = LogisticRegression(max_iter=1000, class_weight="balanced", C=0.1)
+cv_f1_rf = cross_val_score(rf, X_scaled, y, cv=5, scoring="f1").mean()
+cv_auc_rf = cross_val_score(rf, X_scaled, y, cv=5, scoring="roc_auc").mean()
+cv_f1_lr = cross_val_score(lr, X_scaled, y, cv=5, scoring="f1").mean()
+cv_auc_lr = cross_val_score(lr, X_scaled, y, cv=5, scoring="roc_auc").mean()
+print("\n 模型交叉验证性能 ")
+print(f"随机森林  F1: {cv_f1_rf:.3f}, AUC: {cv_auc_rf:.3f}")
+print(f"逻辑回归  F1: {cv_f1_lr:.3f}, AUC: {cv_auc_lr:.3f}")
+rf.fit(X_scaled, y)
+importance_df = shuju_gongju.DataFrame(
+    {"feature": feature_names, "importance": rf.feature_importances_}
+).sort_values("importance", ascending=False)
+print("\n特征重要性")
+print(importance_df.head(10))
+y_proba = rf.predict_proba(X_scaled)[:, 1]
+fpr, tpr, _ = roc_curve(y, y_proba)
+auc = roc_auc_score(y, y_proba)
+huatude.figure(figsize=(8, 6))
+huatude.plot(fpr, tpr, label=f"随机森林(AUC = {auc:.3f})")
+huatude.plot([0, 1], [0, 1], "k--", label="随机猜测")
+huatude.xlabel("假阳性率")
+huatude.xlabel("真阳性率")
+huatude.title("女胎染色体非整倍体检测的ROC曲线")
+huatude.legend()
+huatude.grid(True)
+huatude.savefig(
+    output_dir / "roc_curve_for_female_fetal_aneuploidy_detection.png", dpi=300
+)
+y_pred = rf.predict(X_scaled)
+print("分类报告")
+print(classification_report(y, y_pred, target_names=["正常", "异常"]))
+female_data["rule_z3"] = female_data[z_features].apply(simple_z_rule, axis=1)
+simple_acc = (female_data["rule_z3"] == y).mean()
+print(f"\n经典Z>3规则准确率: {simple_acc:.3f}")
+female_data["quality_weight"] = female_data.apply(quality_weight, axis=1)
+for z_col in z_features:
+    w_col = z_col.replace("Z值", "Z值_加权")
+    female_data[w_col] = female_data[z_col] * female_data["quality_weight"]
+female_data["rule_weighted"] = female_data.apply(weighted_rule, axis=1)
+weighted_acc = (female_data["rule_weighted"] == y).mean()
+print(f"加权Z>2.8规则准确率: {weighted_acc:.3f}")
