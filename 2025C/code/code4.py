@@ -1,29 +1,25 @@
 import pandas as pd
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, roc_auc_score, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MultiLabelBinarizer
-
-# 设置Nature风格可视化
 sns.set_style(
     "whitegrid", {"axes.facecolor": "#F0F0F0", "axes.grid": True, "axes.linewidth": 0.5}
 )
-import matplotlib
-
 fm = matplotlib.font_manager.fontManager
-fm.addfont("./仿宋_GB2312.TTF")
-fm.addfont("./times.ttf")
+fm.addfont("2025C/code/仿宋_GB2312.TTF")
+fm.addfont("2025C/code/times.ttf")
 print(fm)
-# 设置中文字体和负号正常显示
 plt.rcParams["font.sans-serif"] = ["FangSong_GB2312", "times"]
 plt.rcParams["axes.unicode_minus"] = False
 
 
-# 加载女胎数据（替换为实际路径）
-female_data = pd.read_excel("附件.xlsx", sheet_name="女胎检测数据")
+# 读取女胎数据
+female_data = pd.read_excel("2025C/code/附件.xlsx", sheet_name="女胎检测数据")
 
 
 # 解析'染色体的非整倍体'为三元组标签 [13,18,21]
